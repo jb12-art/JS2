@@ -3,12 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/styles.css" />
     <title>Home</title>
   </head>
   <body>
     <div class="page-wrapper">
       <header></header>
-      <main></main>
+      <main>
+        <!-- Register form -->
+        <div class="register-container">
+          <div class="register-message" id="registerMessage"></div>
+          <form id="registerForm" novalidate class="register-form">
+            <label for="nameRegistration">Enter a user name</label>
+            <input
+              class="input-height form_input"
+              type="name"
+              name="name"
+              id="nameRegistration"
+              required
+              placeholder="user name"
+            />
+
+            <label for="emailRegistration">Enter your email</label>
+            <input
+              class="input-height form_input"
+              type="email"
+              name="email"
+              id="emailRegistration"
+              required
+              placeholder="user email"
+            />
+            <small class="error-message" id="emailError"></small>
+
+            <label for="passwordRegistration">Enter your password</label>
+            <input
+              class="input-height form_input"
+              type="password"
+              name="password"
+              id="passwordRegistration"
+              required
+              minlength="8"
+              placeholder="password"
+            />
+            <small class="error-message" id="passwordError"></small>
+            <p class="reg-pass-text">At least 8 characters</p>
+          </form>
+        </div>
+      </main>
       <footer></footer>
     </div>
   </body>

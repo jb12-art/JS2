@@ -1,0 +1,31 @@
+body {
+  margin: 0 auto;
+  min-height: 100vh;
+  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  background-color: bisque;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  height: 100px;
+  background-color: lightblue;
+}
+
+main {
+  flex-grow: 1;
+}
+
+.register-container {
+  margin: auto;
+}
+
+footer {
+  height: 100px;
+  background-color: cadetblue;
+}
