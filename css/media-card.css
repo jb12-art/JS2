@@ -1,0 +1,10 @@
+/* ----- Desktop ----- */
+.media-box {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border: 1px black solid;
+}

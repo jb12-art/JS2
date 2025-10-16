@@ -4,51 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome link -->
+    <script
+      src="https://kit.fontawesome.com/f96e83bcf8.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- index.js -->
+    <script type="module" src="js/index.js" defer></script>
+
     <title>Home</title>
   </head>
   <body>
     <div class="page-wrapper">
-      <header></header>
-      <main>
-        <!-- Register form -->
-        <div class="register-container">
-          <div class="register-message" id="registerMessage"></div>
-          <form id="registerForm" novalidate class="register-form">
-            <label for="nameRegistration">Enter a user name</label>
-            <input
-              class="input-height form_input"
-              type="name"
-              name="name"
-              id="nameRegistration"
-              required
-              placeholder="user name"
-            />
-
-            <label for="emailRegistration">Enter your email</label>
-            <input
-              class="input-height form_input"
-              type="email"
-              name="email"
-              id="emailRegistration"
-              required
-              placeholder="user email"
-            />
-            <small class="error-message" id="emailError"></small>
-
-            <label for="passwordRegistration">Enter your password</label>
-            <input
-              class="input-height form_input"
-              type="password"
-              name="password"
-              id="passwordRegistration"
-              required
-              minlength="8"
-              placeholder="password"
-            />
-            <small class="error-message" id="passwordError"></small>
-            <p class="reg-pass-text">At least 8 characters</p>
-          </form>
+      <header>
+        <div>
+          <h1>Social media platform</h1>
         </div>
+      </header>
+      <main>
+        <div class="register-login-container">
+          <div class="register-div">
+            <a href="account/register.html">
+              <button class="register-btn">Register</button>
+            </a>
+          </div>
+          <div class="login-div">
+            <a href="account/login.html">
+              <button class="login-btn">Login</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="media-box"></div>
       </main>
       <footer></footer>
     </div>

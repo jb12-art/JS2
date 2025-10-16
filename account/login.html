@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- font awesome link -->
+    <script
+      src="https://kit.fontawesome.com/f96e83bcf8.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Login</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header>
+        <div>
+          <h1>Social media platform</h1>
+        </div>
+      </header>
+      <main>
+        <h1 class="page-title">Login</h1>
+        <!-- Register form -->
+        <div class="login-form-container">
+          <div class="login-message" id="loginMessage"></div>
+          <form id="loginForm" novalidate class="login-form">
+            <label for="emailLogin">Enter your email</label>
+            <input
+              class="input-height form_input"
+              type="email"
+              name="email"
+              id="emailLogin"
+              required
+              placeholder="email"
+            />
+            <small class="error-message" id="emailError"></small>
+
+            <label for="passwordLogin">Enter your password</label>
+            <input
+              class="input-height form_input"
+              type="password"
+              name="password"
+              id="passwordLogin"
+              required
+              minlength="8"
+              placeholder="password"
+            />
+            <small class="error-message" id="passwordError"></small>
+
+             <div>
+            <input class="login-btn" type="submit" value="Login"></input>
+            <a class="home-btn" href="../index.html">Back to Home
+              
+            </a>
+            </div>
+          </form>
+        </div>
+      </main>
+      <footer></footer>
+    </div>
+  </body>
+</html>
