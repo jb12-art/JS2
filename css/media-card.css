@@ -1,10 +1,21 @@
 /* ----- Desktop ----- */
+
+.create-post-container {
+  /* margin: auto; */
+  display: flex;
+  flex-direction: column;
+}
+
 .media-box {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 50px;
   border: 1px black solid;
+}
+
+.js-post-card {
+  border: 1px solid black;
 }
