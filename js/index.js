@@ -225,6 +225,7 @@ async function displayPosts() {
       `
         : ""
     }
+    <h2 class="edit-title" style="display:none;">Edit Post</h2>
     `;
 
     container.appendChild(div);
@@ -245,15 +246,28 @@ async function displayPosts() {
       const id = event.target.dataset.id;
       const postCard = event.target.closest(".js-post-card");
 
+      // Show "Edit Post" title
+      const editTitle = postCard.querySelector(".edit-title");
+      if (editTitle) editTitle.style.display = "block";
+
       // Get current values
       const currentTitle = postCard.querySelector("h3").innerText;
       const currentBody = postCard.querySelector("p").innerText;
+      const currentImg = postCard.querySelector("img")?.src || "";
 
       // Replace content with an edit form
       postCard.innerHTML = `
+      <h2 class="edit-title">Edit Post</h2>
       <form class="edit-form">
+      <label>Title:</label>
       <input type="text" id="editTitle" value="${currentTitle}" />
+
+      <label>Content:</label>
       <textarea id="editBody">${currentBody}</textarea>
+
+      <label>Image/ image url:</label>
+      <input type="url" id="editImage" value="${currentImg}" placeholder"Paste image/ image url" />
+
       <button type="submit">Save</button>
       <button type="button" class="cancel-btn">Cancel</button>
       </form>
@@ -266,10 +280,16 @@ async function displayPosts() {
           e.preventDefault();
           const newTitle = e.target.querySelector("#editTitle").value;
           const newBody = e.target.querySelector("#editBody").value;
+          const newImage = e.target.querySelector("#editImage").value;
 
-          await updatePost(id, newTitle, newBody);
+          await updatePost(id, newTitle, newBody, newImage);
           await displayPosts();
         });
+
+      // CANCEL
+      postCard.querySelector(".cancel-btn").addEventListener("click", () => {
+        displayPosts();
+      });
     });
   });
 }
