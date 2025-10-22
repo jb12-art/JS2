@@ -6,6 +6,13 @@
   flex-direction: column;
 }
 
+.new-post {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+  width: 100%;
+}
+
 .media-box {
   max-width: 1200px;
   width: 100%;
