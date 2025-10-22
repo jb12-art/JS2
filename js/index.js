@@ -183,10 +183,8 @@ export function setAuthListener() {
 }
 
 // =============================
-// Display posts
-// =============================
-
 // Display posts in the 'media-box'
+// =============================
 async function displayPosts() {
   const container = document.querySelector(".media-box");
   if (!container) return;
@@ -222,7 +220,7 @@ async function displayPosts() {
     ${
       isMyPost
         ? `
-      <button class="edit-btn" data-id"${post.id}">Edit</button>
+      <button class="edit-btn" data-id="${post.id}">Edit</button>
       <button class="delete-btn" data-id="${post.id}">Delete</button>
       `
         : ""
@@ -241,16 +239,37 @@ async function displayPosts() {
     });
   });
 
-  // Edit event
+  // Edit buttons event
   document.querySelectorAll(".edit-btn").forEach((btn) => {
-    btn.addEventListener("click", async (event) => {
+    btn.addEventListener("click", (event) => {
       const id = event.target.dataset.id;
-      const newTitle = prompt("Enter new title:");
-      const newBody = prompt("Enter new content:");
-      if (newTitle && newBody) {
-        await updatePost(id, newTitle, newBody);
-        displayPosts();
-      }
+      const postCard = event.target.closest(".js-post-card");
+
+      // Get current values
+      const currentTitle = postCard.querySelector("h3").innerText;
+      const currentBody = postCard.querySelector("p").innerText;
+
+      // Replace content with an edit form
+      postCard.innerHTML = `
+      <form class="edit-form">
+      <input type="text" id="editTitle" value="${currentTitle}" />
+      <textarea id="editBody">${currentBody}</textarea>
+      <button type="submit">Save</button>
+      <button type="button" class="cancel-btn">Cancel</button>
+      </form>
+      `;
+
+      // SAVE button inside the form
+      postCard
+        .querySelector(".edit-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const newTitle = e.target.querySelector("#editTitle").value;
+          const newBody = e.target.querySelector("#editBody").value;
+
+          await updatePost(id, newTitle, newBody);
+          await displayPosts();
+        });
     });
   });
 }
