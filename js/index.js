@@ -1,4 +1,6 @@
+// =============================
 // API details
+// =============================
 export const API_KEY = "23b0a87d-57db-46c3-9d24-ad236eb84ac5";
 export const API_BASE = "https://v2.api.noroff.dev";
 export const API_AUTH = "/auth";
@@ -6,7 +8,9 @@ export const API_REGISTER = "/register";
 export const API_LOGIN = "/login";
 export const API_KEY_URL = "/create-api-key";
 
+// =============================
 // Local storage functions
+// =============================
 export function save(key, value) {
   localStorage.setItem(key, JSON.stringify(value));
 }
@@ -14,9 +18,13 @@ export function load(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
-// GET post function / API calls
+// =============================
+// API calls
+// =============================
+
+// GET post function
 export async function getPosts() {
-  const response = await fetch(API_BASE + "/social/posts", {
+  const response = await fetch(`${API_BASE}/social/posts?_author=true`, {
     headers: {
       Authorization: `Bearer ${load("token")}`,
       "X-Noroff-API-Key": API_KEY,
@@ -34,6 +42,8 @@ export async function getPosts() {
  * @example
  * createPost("My Post", "This is my first post", "http://picsum.photos/300");
  */
+
+// Create a post
 export async function createPost(title, body, imageUrl) {
   const postData = {
     title,
@@ -45,6 +55,7 @@ export async function createPost(title, body, imageUrl) {
     postData.media = { url: imageUrl, alt: title };
   }
 
+  // Find out what this do and where I can see it in console.
   console.log("Sending post:", postData);
 
   const response = await fetch(`${API_BASE}/social/posts`, {
@@ -68,9 +79,7 @@ export async function createPost(title, body, imageUrl) {
   return data;
 }
 
-/**
- * Update an existing post by ID.
- */
+// Update an existing post by ID.
 export async function updatePost(id, title, body) {
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
     method: "PUT",
@@ -87,9 +96,7 @@ export async function updatePost(id, title, body) {
   return data;
 }
 
-/**
- * Delete a post by ID.
- */
+// Delete a post by ID.
 export async function deletePost(id) {
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
     method: "DELETE",
@@ -106,26 +113,9 @@ export async function deletePost(id) {
   }
 }
 
-// GET API Key
-export async function getAPIKey() {
-  const response = await fetch(API_BASE + API_AUTH + API_KEY_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${load("token")}`,
-    },
-    body: JSON.stringify({
-      name: "My API key",
-    }),
-  });
-
-  if (response.ok) {
-    return await response.json();
-  }
-
-  console.error(await response.json());
-  throw new Error("Could not register for an API key");
-}
+// =============================
+// Auth functions
+// =============================
 
 // Register user / function / API calls
 export async function register(name, email, password) {
@@ -137,10 +127,7 @@ export async function register(name, email, password) {
     body: JSON.stringify({ name, email, password }),
   });
 
-  if (response.ok) {
-    return await response.json();
-  }
-
+  if (response.ok) return await response.json();
   throw new Error("Could not register the account");
 }
 
@@ -195,6 +182,10 @@ export function setAuthListener() {
   }
 }
 
+// =============================
+// Display posts
+// =============================
+
 // Display posts in the 'media-box'
 async function displayPosts() {
   const container = document.querySelector(".media-box");
@@ -202,12 +193,17 @@ async function displayPosts() {
 
   const postsData = await getPosts();
   const posts = postsData.data; // The actual array of posts
+  const currentUser = load("profile"); // logged-in user
 
   container.innerHTML = ""; // Clear old posts
 
   posts.forEach((post) => {
     const div = document.createElement("div");
     div.classList.add("js-post-card");
+
+    //  Compare logged-in user name to post author name
+    const isMyPost =
+      currentUser && post.author && post.author.name === currentUser.name;
 
     div.innerHTML = `
     <h3>${post.title}</h3>
@@ -219,16 +215,24 @@ async function displayPosts() {
           }" width="200"/>`
         : ""
     }
+    <p><small>By: ${post.author.name || "Unknown"}</small></p>
     <p><small>Created: ${new Date(
       post.created
     ).toLocaleDateString()}</small></p>
-    <button class="delete-btn" data-id="${post.id}">Delete</button>
+    ${
+      isMyPost
+        ? `
+      <button class="edit-btn" data-id"${post.id}">Edit</button>
+      <button class="delete-btn" data-id="${post.id}">Delete</button>
+      `
+        : ""
+    }
     `;
 
     container.appendChild(div);
   });
 
-  // Add delete event listeners
+  // Delete event listeners
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", async (event) => {
       const id = event.target.dataset.id;
@@ -236,9 +240,24 @@ async function displayPosts() {
       displayPosts(); // refresh the list
     });
   });
+
+  // Edit event
+  document.querySelectorAll(".edit-btn").forEach((btn) => {
+    btn.addEventListener("click", async (event) => {
+      const id = event.target.dataset.id;
+      const newTitle = prompt("Enter new title:");
+      const newBody = prompt("Enter new content:");
+      if (newTitle && newBody) {
+        await updatePost(id, newTitle, newBody);
+        displayPosts();
+      }
+    });
+  });
 }
 
-// Handle create post form
+// =============================
+// Create post form handle
+// =============================
 const postForm = document.getElementById("createPostForm");
 if (postForm) {
   postForm.addEventListener("submit", async (event) => {
@@ -253,7 +272,9 @@ if (postForm) {
   });
 }
 
+// =============================
 // Run setup
+// =============================
 // Run displayPosts after login
 displayPosts();
 setAuthListener();
