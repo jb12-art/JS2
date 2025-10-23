@@ -79,8 +79,20 @@ export async function createPost(title, body, imageUrl) {
   return data;
 }
 
-// Update an existing post by ID.
-export async function updatePost(id, title, body) {
+// Update an existing post by ID. (supports image)
+export async function updatePost(id, title, body, imageUrl) {
+  const postData = {
+    title,
+    body,
+  };
+
+  // Only include media if user added an image URL
+  if (imageUrl && imageUrl.trim() !== "") {
+    postData.media = { url: imageUrl, alt: title };
+  }
+
+  console.log("Updating post:", postData);
+
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
     method: "PUT",
     headers: {
@@ -88,10 +100,16 @@ export async function updatePost(id, title, body) {
       Authorization: `Bearer ${load("token")}`,
       "X-Noroff-API-Key": API_KEY,
     },
-    body: JSON.stringify({ title, body }),
+    body: JSON.stringify(postData),
   });
 
   const data = await response.json();
+
+  if (!response.ok) {
+    console.error("Failed to update post:", data);
+    throw new Error(data.errors?.[0]?.message || "Post update failed");
+  }
+
   console.log("Updated post:", data);
   return data;
 }
