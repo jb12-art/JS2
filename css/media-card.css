@@ -28,6 +28,7 @@
 
 .js-post-card {
   border: 1px solid black;
+  cursor: pointer;
 }
 
 /* EDIT FORM classes from javascript */
