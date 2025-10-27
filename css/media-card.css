@@ -19,16 +19,19 @@
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 5px;
+  background-color: darkgray;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 20px;
   border: 1px black solid;
 }
 
 .js-post-card {
   border: 1px solid black;
   cursor: pointer;
+  margin: 20px 20px;
+  background-color: bisque;
 }
 
 /* EDIT FORM classes from javascript */
