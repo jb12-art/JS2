@@ -33,6 +33,20 @@ export async function getPosts() {
   return await response.json();
 }
 
+// Get a single post by ID
+export async function getPost(id) {
+  const response = await fetch(`${API_BASE}/social/posts/${id}?_author=true`, {
+    headers: {
+      Authorization: `Bearer ${load("token")}`,
+      "X-Noroff-API-Key": API_KEY,
+    },
+  });
+
+  const data = await response.json();
+  console.log("Fetch single post:", data); // see in console
+  return data;
+}
+
 /**
  * Create a new post.
  * @param {string} title - The title of the post.
@@ -216,6 +230,7 @@ async function displayPosts() {
   posts.forEach((post) => {
     const div = document.createElement("div");
     div.classList.add("js-post-card");
+    div.dataset.id = post.id;
 
     //  Compare logged-in user name to post author name
     const isMyPost =
@@ -247,6 +262,15 @@ async function displayPosts() {
     `;
 
     container.appendChild(div);
+
+    // Make post clickable to view single post
+    div.addEventListener("click", (event) => {
+      // Avoid triggering if user clicks Edit/Delete
+      if (event.target.tagName === "BUTTON") return;
+
+      // Go to the individual post page
+      window.location.href = `post.html?id=${post.id}`;
+    });
   });
 
   // Delete event listeners
