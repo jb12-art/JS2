@@ -1,5 +1,6 @@
+// post.js
 // View Single Post
-import { getPost, load } from "./index.js";
+import { getPost, load, updatePost, deletePost } from "./index.js";
 
 async function displaySinglePost() {
   const container = document.querySelector(".single-post");
@@ -13,11 +14,11 @@ async function displaySinglePost() {
     return;
   }
 
-  // Fetch the post data
+  // Fetch single post data
   const postData = await getPost(postId);
   const post = postData.data;
 
-  // Same post-card design style with the same class as your feed posts
+  // Create post card
   const postCard = document.createElement("div");
   postCard.classList.add("js-post-card");
 
@@ -55,6 +56,55 @@ async function displaySinglePost() {
   // Add shared postCard design to container
   container.innerHTML = "";
   container.appendChild(postCard);
+
+  // Edit post
+  const editBtn = postCard.querySelector(".edit-btn");
+  if (editBtn) {
+    editBtn.addEventListener("click", () => {
+      postCard.innerHTML = `
+    <h2 class="edit-title">Edit Post</h2>
+    <form class="edit-form">
+    <label>Title:</label>
+    <input type="text" id="editTitle" value="${post.title}" />
+    <label>Body:</label>
+    <textarea id="editBody">${post.body || ""}</textarea>
+    <label>Image URL:</label>
+    <input type="url" id="editImage" value="${post.media?.url || ""}" />
+    <button type="submit">Save</button>
+    <button type="button" class="cancel-btn">Cancel</button>
+    </form>
+    `;
+
+      // Save updated post
+      postCard
+        .querySelector(".edit-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const newTitle = e.target.querySelector("#editTitle").value;
+          const newBody = e.target.querySelector("#editBody").value;
+          const newImage = e.target.querySelector("#editImage").value;
+
+          await updatePost(postId, newTitle, newBody, newImage);
+          displaySinglePost(); // Refresh
+        });
+
+      // Cancel edit
+      postCard.querySelector(".cancel-btn").addEventListener("click", () => {
+        displaySinglePost();
+      });
+    });
+  }
+
+  // Delete post function
+  const deleteBtn = postCard.querySelector(".delete-btn");
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async () => {
+      if (confirm("Delete this post?")) {
+        await deletePost(postId);
+        window.location.href = "index.html"; // back to feed after delete
+      }
+    });
+  }
 }
 
 displaySinglePost();
