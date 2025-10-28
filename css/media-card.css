@@ -17,13 +17,10 @@
 
 .media-box {
   max-width: 1200px;
-  width: 100%;
   margin: 0 auto;
-  padding: 5px;
   background-color: darkgray;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   border: 1px black solid;
 }
 
