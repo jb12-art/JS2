@@ -1,5 +1,7 @@
 // index.js
 
+import { getPost } from "./api.js"; // To get edit content to show in edit
+
 /**
  * Create a new post.
  * @param {string} title - The title of the post.
@@ -85,6 +87,50 @@ async function displayPosts() {
       const id = event.target.dataset.id;
       await deletePost(id);
       displayPosts(); // refresh the list
+    });
+  });
+
+  // Edit button
+  document.querySelectorAll(".edit-btn").forEach((btn) => {
+    btn.addEventListener("click", async (event) => {
+      event.stopPropagation(); // Prevent navigation to post page
+      const id = event.target.dataset.id;
+
+      // Fetch single post for edit
+      const { data: post } = await getPost(id);
+      const postCard = event.target.closest(".js-post-card");
+
+      // Replace content with edit form
+      postCard.innerHTML = `
+      <h2>Edit Post</h2>
+      <form class="edit-form">
+      <label>Title:</label>
+      <input type="text" id="editTitle" value="${post.title}" />
+      <label>Body:</label>
+      <textarea id="editBody">${post.body || ""}</textarea>
+      <label>Image URL:</label>
+      <input type="url" id="editImage" value="${post.media?.url || ""}" />
+      <button type="submit">Save</button>
+      <button type="button" class="cancel-btn">Cancel</button>
+      </form>
+      `;
+
+      // Save button
+      postCard
+        .querySelector(".edit-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const newTitle = e.target.querySelector("#editTitle").value;
+          const newBody = e.target.querySelector("#editBody").value;
+          const newImage = e.target.querySelector("#editImage").value;
+          await updatePost(id, newTitle, newBody, newImage);
+          displayPosts(); // reload posts
+        });
+
+      // Cancel edit button
+      postCard
+        .querySelector(".cancel-btn")
+        .addEventListener("click", displayPosts);
     });
   });
 }

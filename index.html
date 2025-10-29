@@ -16,9 +16,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- index.js -->
-    <script type="module" src="./js/index.js" defer></script>
-
     <title>Posts/Feed page</title>
   </head>
   <body>
@@ -66,8 +63,19 @@
         </div>
 
         <div class="media-box"></div>
+        <form id="createPostForm">
+          <input type="text" id="postTitle" placeholder="Title" required />
+          <textarea id="postBody" placeholder="Body"></textarea>
+          <input type="url" id="postImage" placeholder="Image URL (optional)" />
+          <button type="submit">Create Post</button>
+        </form>
       </main>
       <footer></footer>
     </div>
+    <!-- Load shared API and utilities first/ api.js -->
+    <script type="module" src="./js/api.js"></script>
+
+    <!-- Then load the page-specific logic/ index.js -->
+    <script type="module" src="./js/index.js"></script>
   </body>
 </html>

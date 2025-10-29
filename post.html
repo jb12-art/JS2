@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Single post</title>
     <link rel="stylesheet" href="css/styles.css" />
-    <script type="module" src="./js/post.js" defer></script>
   </head>
   <body>
     <div class="page-wrapper">
@@ -23,5 +22,11 @@
       </main>
       <footer></footer>
     </div>
+
+    <!-- Load shared API and utilities first/ api.js -->
+    <script type="module" src="./js/api.js"></script>
+
+    <!-- Then load the Page-specific single post logic/ post.js -->
+    <script type="module" src="./js/post.js"></script>
   </body>
 </html>

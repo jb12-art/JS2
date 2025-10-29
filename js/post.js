@@ -1,6 +1,6 @@
 // post.js
 // View Single Post
-import { getPost, load, updatePost, deletePost } from "./index.js";
+import { getPost, load, updatePost, deletePost } from "./api.js";
 
 async function displaySinglePost() {
   const container = document.querySelector(".single-post");
