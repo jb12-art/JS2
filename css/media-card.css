@@ -1,11 +1,11 @@
 /* ----- Desktop ----- */
 
 .create-post-container {
-  /* margin: auto; */
   display: flex;
   flex-direction: column;
-  text-align: center;
   align-items: center;
+  border-bottom: 1px black solid;
+  padding-bottom: 30px;
 }
 
 .new-post {
@@ -29,6 +29,22 @@
   cursor: pointer;
   margin: 20px 20px;
   background-color: bisque;
+}
+
+/* feed page/ js.post-card edit/delete buttons */
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+.edit-btn {
+  background-color: lightskyblue;
+}
+
+.delete-btn {
+  background-color: lightcoral;
 }
 
 /* EDIT FORM classes from javascript */

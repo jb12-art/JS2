@@ -44,31 +44,34 @@
           </div>
         </section>
 
-        <!-- simple form to create a new post -->
+        <!-- Form to create a new post -->
         <div class="create-post-container">
           <h2>Create a new post</h2>
           <form id="createPostForm" class="new-post">
             <input
+              class="input-height"
               type="text"
               id="postTitle"
               placeholder="Post title"
               required
             />
             <textarea
+              class="new-post-text-input"
               id="postBody"
               placeholder="Write something..."
               required
             ></textarea>
             <input
+              class="input-height"
               type="url"
               id="postImage"
               placeholder="Image URL (optional)"
             />
-            <button type="submit">Post</button>
+            <button class="new-post-btn" type="submit">Post</button>
           </form>
         </div>
 
-        <!-- All posts list -->
+        <!-- All feed posts list -->
         <section class="feed-section">
           <h2>Latests Posts</h2>
           <div class="media-box"></div>

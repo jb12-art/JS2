@@ -2,9 +2,13 @@
 
 /* 'Section' register/ login buttons */
 .auth-buttons {
+  margin: 10px;
+  max-width: fit-content;
+  padding: 0px 10px 10px;
   display: flex;
   flex-direction: column;
   border-style: dotted;
+  border-width: 2px;
   border-radius: 6px;
 }
 

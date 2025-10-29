@@ -25,6 +25,21 @@ main {
   flex-grow: 1;
 }
 
+/* index.html textarea form */
+.new-post-text-input {
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.new-post-btn {
+  max-width: 200px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: lightgreen;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}
+
 .page-title {
   text-align: center;
 }
