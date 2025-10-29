@@ -1,21 +1,20 @@
 /* Register and Login CSS */
 
-/* At Home page buttons */
+/* 'Section' register/ login buttons */
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  border-style: dotted;
+  border-radius: 6px;
+}
+
+/* register/ login container div */
 .register-login-container {
   display: flex;
   max-width: 165px;
   justify-content: space-between;
   margin: 5px 0px 0px 5px;
   /* border-style: dashed; */
-}
-
-/* At Home page buttons */
-.register-div,
-.login-div {
-  display: flex;
-  flex-direction: row;
-  border-style: dotted;
-  border-radius: 6px;
 }
 
 .register-form-container,

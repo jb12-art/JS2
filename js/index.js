@@ -75,8 +75,8 @@ async function displayPosts() {
       // Avoid triggering if user clicks Edit/Delete
       if (event.target.tagName === "BUTTON") return;
 
-      // Go to the individual post page
-      window.location.href = `post.html?id=${post.id}`;
+      // Go to the individual post page in new tab
+      window.open(`post.html?id=${post.id}`, "_blank");
     });
   });
 
@@ -114,6 +114,11 @@ async function displayPosts() {
       <button type="button" class="cancel-btn">Cancel</button>
       </form>
       `;
+
+      // Prevent feed post edit to navigation to single post edit
+      postCard.querySelector(".edit-form").addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
 
       // Save button
       postCard
