@@ -48,6 +48,23 @@ export async function getPost(id) {
   return data;
 }
 
+// Get all posts from one user
+export async function getUserPosts(username) {
+  const response = await fetch(
+    `${API_BASE}/social/profiles/${username}/posts?_author=true`,
+    {
+      headers: {
+        Authorization: `Bearer ${load("token")}`,
+        "X-Noroff-API-Key": API_KEY,
+      },
+    }
+  );
+
+  const data = await response.json();
+  console.log(`Posts of user ${username}:`, data);
+  return data;
+}
+
 // Create a post
 export async function createPost(title, body, imageUrl) {
   const postData = {
