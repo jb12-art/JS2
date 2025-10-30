@@ -57,6 +57,11 @@ async function displayPosts() {
     <p><small>Created: ${new Date(
       post.created
     ).toLocaleDateString()}</small></p>
+
+    <button class="view-user-btn" data-username="${post.author.name}">
+      View all ${post.author.name}'s Posts
+    </button>
+
     ${
       isMyPost
         ? `
@@ -77,6 +82,17 @@ async function displayPosts() {
 
       // Go to the individual post page in new tab
       window.open(`post.html?id=${post.id}`, "_blank");
+    });
+  });
+
+  // View all user's posts button
+  document.querySelectorAll(".view-user-btn").forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const username = event.target.dataset.username;
+
+      // Open new browser window tab
+      window.open(`user-posts.html?name=${username}`, "_blank");
     });
   });
 
