@@ -35,7 +35,7 @@ async function displaySinglePost() {
     post.media?.url
       ? `<img src="${post.media.url}" alt="${
           post.media.alt || "Post image"
-        }" width="300 />`
+        }" width="300" />`
       : ""
   }
   <p><small>By: ${post.author.name || "Unknown"}</small></p>
