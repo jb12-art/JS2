@@ -21,27 +21,49 @@ import {
   setAuthListener,
 } from "./api.js";
 
+let allPosts = []; // store posts globally
+
 // =============================
 // Display posts in the 'media-box'
 // =============================
-async function displayPosts() {
+async function displayPosts(searchTerm = "") {
   const container = document.querySelector(".media-box");
   if (!container) return;
 
-  const postsData = await getPosts();
-  const posts = postsData.data; // The actual array of posts
-  const currentUser = load("profile"); // logged-in user
+  // Fetch posts only if you have not
+  if (allPosts.length === 0) {
+    const postsData = await getPosts();
+    allPosts = postsData.data;
+  }
 
+  const currentUser = load("profile"); // logged-in user
   container.innerHTML = ""; // Clear old posts
 
-  posts.forEach((post) => {
+  // Filter posts by search term (case-insensitive)
+  const filteredPosts = allPosts.filter((post) => {
+    const title = post.title?.toLowerCase() || "";
+    const body = post.body?.toLowerCase() || "";
+    return (
+      title.includes(searchTerm.toLowerCase()) ||
+      body.includes(searchTerm.toLowerCase())
+    );
+  });
+
+  // Show message if no search is found
+  if (filteredPosts.length === 0) {
+    container.innerHTML = `<p>No posts found.</p>`;
+    return;
+  }
+
+  // Render posts
+  filteredPosts.forEach((post) => {
     const div = document.createElement("div");
     div.classList.add("js-post-card");
     div.dataset.id = post.id;
 
     //  Compare logged-in user name to post author name
     const isMyPost =
-      currentUser && post.author && post.author?.name === currentUser.name;
+      currentUser && post.author && post.author.name === currentUser.name;
 
     div.innerHTML = `
     <h3>${post.title}</h3>
@@ -102,7 +124,8 @@ async function displayPosts() {
       event.stopPropagation();
       const id = event.target.dataset.id;
       await deletePost(id);
-      displayPosts(); // refresh the list
+      allPosts = []; // refresh data
+      displayPosts(searchInput.value);
     });
   });
 
@@ -145,14 +168,23 @@ async function displayPosts() {
           const newBody = e.target.querySelector("#editBody").value;
           const newImage = e.target.querySelector("#editImage").value;
           await updatePost(id, newTitle, newBody, newImage);
-          displayPosts(); // reload posts
+          allPosts = [];
+          displayPosts(searchInput.value); // reload posts
         });
 
       // Cancel edit button
       postCard
         .querySelector(".cancel-btn")
-        .addEventListener("click", displayPosts);
+        .addEventListener("click", () => displayPosts(searchInput.value));
     });
+  });
+}
+
+// Search event listener
+const searchInput = document.getElementById("searchInput");
+if (searchInput) {
+  searchInput.addEventListener("input", () => {
+    displayPosts(searchInput.value);
   });
 }
 
@@ -168,8 +200,9 @@ if (postForm) {
     const imageUrl = postForm.querySelector("#postImage").value;
 
     await createPost(title, body, imageUrl);
+    allPosts = [];
     postForm.reset();
-    displayPosts();
+    displayPosts(searchInput.value);
   });
 }
 
