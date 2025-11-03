@@ -212,3 +212,17 @@ if (postForm) {
 // Run displayPosts after login
 displayPosts();
 setAuthListener();
+
+// Go to user profile page
+const viewProfileBtn = document.getElementById("viewProfileBtn");
+if (viewProfileBtn) {
+  viewProfileBtn.addEventListener("click", () => {
+    const currentUser = load("profile");
+    if (!currentUser) {
+      // container.innerHTML = `<p>Please login or register first.</p>`;
+      alert("Please login first.");
+      return;
+    }
+    window.location.href = "user-profile.html";
+  });
+}
