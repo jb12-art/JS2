@@ -40,6 +40,15 @@ main {
   border-radius: 0.5rem;
 }
 
+/* Index.html */
+.search-posts {
+  margin: 10px;
+  padding: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* register/login.html */
 .page-title {
   text-align: center;
 }
