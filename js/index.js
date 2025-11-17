@@ -1,4 +1,5 @@
 // index.js
+"use-strict"; // Strict mode ON in local browser.
 
 import { getPost } from "./api.js"; // To get edit content to show in edit
 

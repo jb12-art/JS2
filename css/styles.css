@@ -25,6 +25,15 @@ main {
   flex-grow: 1;
 }
 
+/* your Profile button */
+.your-profile-btn {
+  margin: 40px 10px 10px 10px;
+  padding: 15px;
+  background-color: orchid;
+  border: 1px black solid;
+  cursor: pointer;
+}
+
 /* index.html textarea form */
 .new-post-text-input {
   height: 60px;
@@ -42,7 +51,8 @@ main {
 
 /* Index.html */
 .search-posts {
-  margin: 10px;
+  margin: auto;
+  display: flex;
   padding: 8px;
   width: 100%;
   max-width: 400px;

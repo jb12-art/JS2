@@ -1,5 +1,7 @@
 // post.js
 // View Single Post
+"use-strict"; // Strict mode ON in local browser.
+
 import { getPost, load, updatePost, deletePost } from "./api.js";
 
 async function displaySinglePost() {

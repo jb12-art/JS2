@@ -30,7 +30,6 @@
     <div class="page-wrapper">
       <header>
         <h1>Social media platform</h1>
-        <button id="viewProfileBtn">Your Profile</button>
       </header>
 
       <main>
@@ -46,6 +45,12 @@
             </a>
           </div>
         </section>
+
+        <!-- Your profile button -->
+
+        <button class="your-profile-btn" id="viewProfileBtn">
+          Your Profile
+        </button>
 
         <!-- Form to create a new post -->
         <div class="create-post-container">
@@ -78,13 +83,13 @@
         <input
           type="search"
           id="searchInput"
-          placeholder="Search posts"
+          placeholder="Search for posts"
           class="search-posts"
         />
 
         <!-- All feed posts list -->
         <section class="feed-section">
-          <h2>Latests Posts</h2>
+          <h2 class="latest-posts">Latests Posts</h2>
           <div class="media-box"></div>
         </section>
       </main>

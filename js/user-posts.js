@@ -1,4 +1,5 @@
 // user-posts.js
+"use-strict"; // Strict mode ON in local browser.
 
 // All posts from one user
 import {

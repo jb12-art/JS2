@@ -1,5 +1,7 @@
 // User’s own profile page
 
+"use-strict"; // Strict mode ON in local browser.
+
 import { load, getUserPosts, getProfile } from "./api.js";
 
 async function displayUserProfile() {
