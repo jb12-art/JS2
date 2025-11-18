@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All posts page</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="#" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,23 +35,27 @@
 
       <main>
         <!-- Auth register/ login buttons -->
-        <section class="auth-buttons">
-          <h2>Register or Login</h2>
-          <div class="register-login-container">
-            <a href="account/register.html">
-              <button class="register-btn">Register</button>
-            </a>
-            <a href="account/login.html">
-              <button class="login-btn">Login</button>
-            </a>
-          </div>
-        </section>
+        <div class="reglog-profile-div">
+          <section class="auth-buttons">
+            <h2>Register or Login</h2>
+            <div class="register-login-container">
+              <a href="account/register.html">
+                <button class="register-btn">Register</button>
+              </a>
+              <a href="account/login.html">
+                <button class="login-btn">Login</button>
+              </a>
+            </div>
+          </section>
 
-        <!-- Your profile button -->
-
-        <button class="your-profile-btn" id="viewProfileBtn">
-          Your Profile
-        </button>
+          <!-- Your profile button -->
+          <section class="profile-section">
+            <h2>See profile</h2>
+            <button class="your-profile-btn" id="viewProfileBtn">
+              Your Profile
+            </button>
+          </section>
+        </div>
 
         <!-- Form to create a new post -->
         <div class="create-post-container">
@@ -80,6 +85,7 @@
         </div>
 
         <!-- Search Posts -->
+        <h3 class="search-posts-title">Search posts by title or content</h3>
         <input
           type="search"
           id="searchInput"

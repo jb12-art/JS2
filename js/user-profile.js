@@ -23,14 +23,16 @@ async function displayUserProfile() {
 
   // Basic profile info
   container.innerHTML = `
-  <h2>${profile.name}</h2>
+  <div class="js-profile-info">
+  <p><strong>Name:</strong> ${profile.name}</p>
   <p><strong>Email:</strong> ${profile.email}</p>
   <p><strong>Followers:</strong> ${profile._count.followers}</p>
   <p><strong>Following:</strong> ${profile._count.following}</p>
   <p><strong>Posts:</strong> ${profile._count.posts}</p>
   <hr>
   <h3>Your Posts</h3>
-  <div class="user-posts"></di>
+  </div>
+  <div class="user-posts"></div>;
   `;
 
   // Fetch user's own posts

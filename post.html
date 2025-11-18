@@ -2,26 +2,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Load shared API and utilities first/ api.js -->
-    <script type="module" src="./js/api.js"></script>
-
-    <!-- Then load the Page-specific single post logic/ post.js -->
-    <script type="module" src="./js/post.js"></script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Single post</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="#" />
+    <!-- Load shared API and utilities first/ api.js -->
+    <script type="module" src="./js/api.js" defer></script>
+
+    <!-- Then load the Page-specific single post logic/ post.js -->
+    <script type="module" src="./js/post.js" defer></script>
   </head>
   <body>
     <div class="page-wrapper">
       <header>
         <h1>Social media platform</h1>
-        <a href="index.html">Back to feed</a>
+        <a class="home-page-link" href="index.html">Back to Home</a>
       </header>
 
       <main>
-        <h1>Single Post</h1>
+        <h1 class="page-title">Single Post</h1>
         <div class="media-box">
           <div class="single-post"></div>
         </div>
