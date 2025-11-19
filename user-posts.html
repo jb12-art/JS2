@@ -7,7 +7,12 @@
     <title>All user's posts</title>
     <link rel="icon" href="#" />
     <link rel="stylesheet" href="css/styles.css" />
-    <script type="module" src="./js/user-posts.js" defer></script>
+    <!-- Load shared API and utilities first/ api folder -->
+    <script type="module" src="./js/api/posts.js" defer></script>
+    <script type="module" src="./js/api/profiles.js" defer></script>
+    <script type="module" src="./js/api/storage.js" defer></script>
+    <!-- Then load the Page-specific single post logic/ user-posts.js -->
+    <script type="module" src="./js/pages/user-posts.js" defer></script>
   </head>
   <body>
     <div class="page-wrapper">

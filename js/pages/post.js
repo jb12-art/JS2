@@ -2,7 +2,8 @@
 // View Single Post
 "use-strict"; // Strict mode ON in local browser.
 
-import { getPost, load, updatePost, deletePost } from "./api.js";
+import { load } from "../api/storage.js";
+import { getPost, updatePost, deletePost } from "../api/posts.js";
 
 async function displaySinglePost() {
   const container = document.querySelector(".single-post");

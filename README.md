@@ -2,7 +2,7 @@
 
 # Description
 
-- JavaScript 2, Noroff API V2 - Using JWT and API Keys.
+- Noroff API V2 - Using JWT and API Keys.
 - producing a new JavaScript front-end client for an existing social media platform.
 
 #
@@ -34,4 +34,4 @@ User with @noroff.no email can register a profile.
 
 # Author
 
-jb12-art / Jørgen Bjørnethun
+jb12-art

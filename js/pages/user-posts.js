@@ -2,13 +2,9 @@
 "use-strict"; // Strict mode ON in local browser.
 
 // All posts from one user
-import {
-  getUserPosts,
-  followUser,
-  unfollowUser,
-  getProfile,
-  load,
-} from "./api.js";
+import { getUserPosts } from "../api/posts.js";
+import { followUser, unfollowUser, getProfile } from "../api/profiles.js";
+import { load } from "../api/storage.js";
 
 // Get query parameter from URL
 function getQueryParam(key) {

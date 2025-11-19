@@ -2,7 +2,9 @@
 
 "use-strict"; // Strict mode ON in local browser.
 
-import { load, getUserPosts, getProfile } from "./api.js";
+import { load } from "../api/storage.js";
+import { getUserPosts } from "../api/posts.js";
+import { getProfile } from "../api/profiles.js";
 
 async function displayUserProfile() {
   const container = document.querySelector(".media-box");

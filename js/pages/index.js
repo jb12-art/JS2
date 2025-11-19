@@ -1,7 +1,10 @@
 // index.js
 "use-strict"; // Strict mode ON in local browser.
 
-import { getPost } from "./api.js"; // To get edit content to show in edit
+import { getPost } from "../api/posts.js"; // To get edit content to show in edit
+import { getPosts, createPost, deletePost, updatePost } from "../api/posts.js";
+import { load } from "../api/storage.js";
+import { setAuthListener } from "../api/auth.js";
 
 /**
  * Create a new post.
@@ -13,17 +16,13 @@ import { getPost } from "./api.js"; // To get edit content to show in edit
  * createPost("My Post", "This is my first post", "http://picsum.photos/300");
  */
 
-import {
-  getPosts,
-  createPost,
-  deletePost,
-  updatePost,
-  load,
-  setAuthListener,
-} from "./api.js";
-
 let allPosts = []; // store posts globally
 
+/**
+ * Display all posts in the feed with search filtering.
+ * @param {string} [searchTerm=""] - Text used to filter posts by title or body.
+ * @returns {Promise<void>}
+ */
 // =============================
 // Display posts in the 'media-box'
 // =============================
@@ -181,7 +180,9 @@ async function displayPosts(searchTerm = "") {
   });
 }
 
-// Search event listener
+// =============================
+// Search input event listener
+// =============================
 const searchInput = document.getElementById("searchInput");
 if (searchInput) {
   searchInput.addEventListener("input", () => {
@@ -192,6 +193,11 @@ if (searchInput) {
 // =============================
 // Create post form handle
 // =============================
+/**
+ * Handles the form submission to create a new post.
+ * @param {SubmitEvent} event - The form submit event.
+ * @returns {Promise<void>}
+ */
 const postForm = document.getElementById("createPostForm");
 if (postForm) {
   postForm.addEventListener("submit", async (event) => {
@@ -208,13 +214,12 @@ if (postForm) {
 }
 
 // =============================
-// Run setup
+// View profile button
 // =============================
-// Run displayPosts after login
-displayPosts();
-setAuthListener();
-
-// Go to user profile page
+/**
+ * Navigates the logged-in user to their profile page.
+ * Alerts user if no profile exists or not logged in.
+ */
 const viewProfileBtn = document.getElementById("viewProfileBtn");
 if (viewProfileBtn) {
   viewProfileBtn.addEventListener("click", () => {
@@ -227,3 +232,10 @@ if (viewProfileBtn) {
     window.location.href = "user-profile.html";
   });
 }
+
+// =============================
+// Run setup
+// =============================
+// Run displayPosts after login
+displayPosts();
+setAuthListener();

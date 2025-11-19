@@ -15,9 +15,11 @@
       src="https://kit.fontawesome.com/f96e83bcf8.js"
       crossorigin="anonymous"
     ></script>
-
-    <!-- index.js -->
-    <script type="module" src="../js/index.js" defer></script>
+    <!-- Load shared API and utilities first/ api folder -->
+     <script type="module" src="../js/api/auth.js" defer></script>
+     <script type="module" src="../js/api/storage.js" defer></script>
+    <!-- Then load the Page-specific single post logic/ index.js -->
+    <script type="module" src="../js/pages/index.js" defer></script>
 
     <title>Login Page</title>
   </head>
