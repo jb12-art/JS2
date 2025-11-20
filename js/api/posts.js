@@ -7,7 +7,9 @@
 import { API_BASE, API_KEY } from "./config.js";
 import { load } from "./storage.js";
 
+// ==============
 // GET all posts
+// ==============
 export async function getPosts() {
   const response = await fetch(`${API_BASE}/social/posts?_author=true`, {
     headers: {
@@ -18,7 +20,9 @@ export async function getPosts() {
   return await response.json();
 }
 
+// ========================
 // Get a single post by ID
+// ========================
 export async function getPost(id) {
   const response = await fetch(`${API_BASE}/social/posts/${id}?_author=true`, {
     headers: {
@@ -32,7 +36,9 @@ export async function getPost(id) {
   return data;
 }
 
+// ============================
 // Get all posts from one user
+// ============================
 export async function getUserPosts(username) {
   const response = await fetch(
     `${API_BASE}/social/profiles/${username}/posts?_author=true`,
@@ -49,7 +55,19 @@ export async function getUserPosts(username) {
   return data;
 }
 
+// ===================
 // Create a post
+// ===================
+/**
+ * 'createPost'
+ * Create a new post.
+ * @param {string} title - The title of the post.
+ * @param {string} body - The body text of the post.
+ * @param {string} imageUrl - (optional) A public image URL.
+ * @returns {promise<object>} The created post.
+ * @example
+ * createPost("My Post", "This is my first post", "http://picsum.photos/300");
+ */
 export async function createPost(title, body, imageUrl) {
   const postData = {
     title,
@@ -117,7 +135,9 @@ export async function updatePost(id, title, body, imageUrl) {
   return data;
 }
 
+// =====================
 // Delete a post by ID.
+// =====================
 export async function deletePost(id) {
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
     method: "DELETE",

@@ -6,26 +6,18 @@ import { getPosts, createPost, deletePost, updatePost } from "../api/posts.js";
 import { load } from "../api/storage.js";
 import { setAuthListener } from "../api/auth.js";
 
-/**
- * Create a new post.
- * @param {string} title - The title of the post.
- * @param {string} body - The body text of the post.
- * @param {string} imageUrl - (optional) A public image URL.
- * @returns {promise<object>} The created post.
- * @example
- * createPost("My Post", "This is my first post", "http://picsum.photos/300");
- */
-
 let allPosts = []; // store posts globally
 
+// =============================
+// Display posts in the 'media-box'
+// =============================
 /**
  * Display all posts in the feed with search filtering.
  * @param {string} [searchTerm=""] - Text used to filter posts by title or body.
  * @returns {Promise<void>}
+ * @example
+ * Write some words in the searchbar and see what show up.
  */
-// =============================
-// Display posts in the 'media-box'
-// =============================
 async function displayPosts(searchTerm = "") {
   const container = document.querySelector(".media-box");
   if (!container) return;
