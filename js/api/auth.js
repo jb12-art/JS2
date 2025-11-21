@@ -5,7 +5,6 @@
 "use-strict"; // Strict mode ON in local browser.
 
 import { API_BASE, API_AUTH, API_REGISTER, API_LOGIN } from "./config.js";
-
 import { save } from "./storage.js";
 
 // Register user / function / API calls
@@ -19,7 +18,9 @@ export async function register(name, email, password) {
   });
 
   if (response.ok) return await response.json();
-  throw new Error("Could not register the account");
+  throw new Error(
+    "Account is already registered, choose another name and email."
+  );
 }
 
 // Login user / function / API calls
@@ -43,24 +44,41 @@ export async function login(email, password) {
 }
 
 // Handle register/login
-// Attach Auth event listener
 export function setAuthListener() {
   const registerForm = document.getElementById("registerForm");
   const loginForm = document.getElementById("loginForm");
 
+  // Register
   if (registerForm) {
     registerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+      const messageBox = document.getElementById("registerMessage");
+
       const name = event.target.name.value;
       const email = event.target.email.value;
       const password = event.target.password.value;
 
-      await register(name, email, password);
-      await login(email, password);
-      alert("Registration successful");
+      try {
+        await register(name, email, password);
+        await login(email, password);
+
+        messageBox.textContent =
+          "Registration successful! Redirecting to Home page...";
+        messageBox.style.color = "green";
+
+        event.target.reset();
+
+        setTimeout(() => {
+          window.location.href = "../index.html";
+        }, 2000); // 2 seconds wait.
+      } catch (error) {
+        messageBox.textContent = error.message;
+        messageBox.style.color = "red";
+      }
     });
   }
 
+  // Login
   if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
