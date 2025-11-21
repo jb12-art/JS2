@@ -76,7 +76,7 @@ export function setAuthListener() {
         messageBox.style.color = "red";
         messageBox.style.textAlign = "center";
         messageBox.style.marginBottom = "10px";
-        messageBox.style.textDecoration = "underline 2px black";
+        messageBox.style.textDecoration = "underline 1px black";
       }
     });
   }
