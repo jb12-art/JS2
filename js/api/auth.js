@@ -85,12 +85,26 @@ export function setAuthListener() {
   if (loginForm) {
     loginForm.addEventListener("submit", async (event) => {
       event.preventDefault();
+      const messageBox = document.getElementById("loginMessage");
+
       const email = event.target.email.value;
       const password = event.target.password.value;
 
-      await login(email, password);
+      try {
+        await login(email, password);
 
-      event.target.reset();
+        event.target.reset();
+
+        setTimeout(() => {
+          window.location.href = "../index.html";
+        });
+      } catch (error) {
+        messageBox.textContent = error.message;
+        messageBox.style.color = "red";
+        messageBox.style.textAlign = "center";
+        messageBox.style.marginBottom = "10px";
+        messageBox.style.textDecoration = "underline 1px black";
+      }
     });
   }
 }

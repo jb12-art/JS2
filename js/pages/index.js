@@ -1,8 +1,13 @@
 // index.js
 "use-strict"; // Strict mode ON in local browser.
 
-import { getPost } from "../api/posts.js"; // To get edit content to show in edit
-import { getPosts, createPost, deletePost, updatePost } from "../api/posts.js";
+import {
+  getPost,
+  getPosts,
+  createPost,
+  deletePost,
+  updatePost,
+} from "../api/posts.js";
 import { load } from "../api/storage.js";
 import { setAuthListener } from "../api/auth.js";
 
