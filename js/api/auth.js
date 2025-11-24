@@ -89,7 +89,8 @@ export function setAuthListener() {
       const password = event.target.password.value;
 
       await login(email, password);
-      alert("Login successful");
+
+      event.target.reset();
     });
   }
 }
