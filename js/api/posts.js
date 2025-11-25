@@ -153,3 +153,28 @@ export async function deletePost(id) {
     console.error("Failed to delete post:", await response.json());
   }
 }
+
+// =====================================
+// Search for posts, using a search bar
+// =====================================
+export async function searchPosts(query) {
+  const response = await fetch(
+    `${API_BASE}/social/posts/search?q=${encodeURIComponent(
+      query
+    )}&_author=true`,
+    {
+      headers: {
+        Authorization: `Bearer ${load("token")}`,
+        "X-Noroff-API-Key": API_KEY,
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error("Search failed:", data);
+    throw new Error(data.errors?.[0]?.message || "Could not search posts");
+  }
+  return data;
+}

@@ -7,64 +7,66 @@ import {
   createPost,
   deletePost,
   updatePost,
+  searchPosts,
 } from "../api/posts.js";
+
 import { load } from "../api/storage.js";
 import { setAuthListener } from "../api/auth.js";
 
 let allPosts = []; // store posts globally
 
+// ======================
+// Fetch & Display posts
+// ======================
+/**
+ * Load posts depending on search term.
+ * If searchTerm is empty, load all posts
+ * If searchTerm has text, search API is used
+ * * @example
+ * Write some words in the searchbar and see what show up.
+ */
+async function loadPosts(searchTerm = "") {
+  if (searchTerm.trim() === "") {
+    const data = await getPosts();
+    allPosts = data.data;
+  } else {
+    const data = await searchPosts(searchTerm);
+    allPosts = data.data;
+  }
+}
+
 // =============================
 // Display posts in the 'media-box'
 // =============================
 /**
- * Display all posts in the feed with search filtering.
- * @param {string} [searchTerm=""] - Text used to filter posts by title or body.
- * @returns {Promise<void>}
- * @example
- * Write some words in the searchbar and see what show up.
+ * Renders the posts to the feed area.
  */
 async function displayPosts(searchTerm = "") {
   const container = document.querySelector(".media-box");
   if (!container) return;
 
-  // Fetch posts only if you have not
-  if (allPosts.length === 0) {
-    const postsData = await getPosts();
-    allPosts = postsData.data;
-  }
+  // Fetch from API (all or search)
+  await loadPosts(searchTerm);
 
   const currentUser = load("profile"); // logged-in user
   container.innerHTML = ""; // Clear old posts
 
-  // Filter posts by search term (case-insensitive)
-  const filteredPosts = allPosts.filter((post) => {
-    const title = post.title?.toLowerCase() || "";
-    const body = post.body?.toLowerCase() || "";
-    return (
-      title.includes(searchTerm.toLowerCase()) ||
-      body.includes(searchTerm.toLowerCase())
-    );
-  });
-
-  // Show message if no search is found
-  if (filteredPosts.length === 0) {
-    container.innerHTML = `<p>No posts found.</p>`;
+  if (allPosts.length === 0) {
+    container.innerHTML = "<p>No posts found.</p>";
     return;
   }
 
-  // Render posts
-  filteredPosts.forEach((post) => {
+  allPosts.forEach((post) => {
     const div = document.createElement("div");
     div.classList.add("js-post-card");
     div.dataset.id = post.id;
 
-    //  Compare logged-in user name to post author name
-    const isMyPost =
-      currentUser && post.author && post.author.name === currentUser.name;
+    const isMyPost = currentUser && post.author?.name === currentUser.name;
 
     div.innerHTML = `
     <h3>${post.title}</h3>
     <p>${post.body || "No content"}</p>
+
     ${
       post.media?.url
         ? `<img src="${post.media.url}" alt="${
@@ -108,7 +110,7 @@ async function displayPosts(searchTerm = "") {
   document.querySelectorAll(".view-user-btn").forEach((btn) => {
     btn.addEventListener("click", (event) => {
       event.stopPropagation();
-      const username = event.target.dataset.username;
+      const username = btn.target.dataset.username;
 
       // Open new browser window tab
       window.open(`user-posts.html?name=${username}`, "_blank");
@@ -119,7 +121,7 @@ async function displayPosts(searchTerm = "") {
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", async (event) => {
       event.stopPropagation();
-      const id = event.target.dataset.id;
+      const id = btn.dataset.id;
       await deletePost(id);
       allPosts = []; // refresh data
       displayPosts(searchInput.value);
@@ -130,7 +132,7 @@ async function displayPosts(searchTerm = "") {
   document.querySelectorAll(".edit-btn").forEach((btn) => {
     btn.addEventListener("click", async (event) => {
       event.stopPropagation(); // Prevent navigation to post page
-      const id = event.target.dataset.id;
+      const id = btn.dataset.id;
 
       // Fetch single post for edit
       const { data: post } = await getPost(id);
@@ -152,9 +154,9 @@ async function displayPosts(searchTerm = "") {
       `;
 
       // Prevent feed post edit to navigation to single post edit
-      postCard.querySelector(".edit-form").addEventListener("click", (e) => {
-        e.stopPropagation();
-      });
+      postCard
+        .querySelector(".edit-form")
+        .addEventListener("click", (e) => e.stopPropagation());
 
       // Save button
       postCard
@@ -164,15 +166,16 @@ async function displayPosts(searchTerm = "") {
           const newTitle = e.target.querySelector("#editTitle").value;
           const newBody = e.target.querySelector("#editBody").value;
           const newImage = e.target.querySelector("#editImage").value;
+
           await updatePost(id, newTitle, newBody, newImage);
           allPosts = [];
           displayPosts(searchInput.value); // reload posts
         });
 
       // Cancel edit button
-      postCard
-        .querySelector(".cancel-btn")
-        .addEventListener("click", () => displayPosts(searchInput.value));
+      postCard.querySelector(".cancel-btn").addEventListener("click", () => {
+        displayPosts(searchInput.value);
+      });
     });
   });
 }
@@ -204,7 +207,6 @@ if (postForm) {
     const imageUrl = postForm.querySelector("#postImage").value;
 
     await createPost(title, body, imageUrl);
-    allPosts = [];
     postForm.reset();
     displayPosts(searchInput.value);
   });
