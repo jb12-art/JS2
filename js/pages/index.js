@@ -121,8 +121,15 @@ async function displayPosts(searchTerm = "") {
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", async (event) => {
       event.stopPropagation();
+
       const id = btn.dataset.id;
+
+      // Alert popup on delete button
+      const confirmed = confirm("Are you sure you want to delete this post?");
+      if (!confirmed) return; // Stop if user click Cancel
+
       await deletePost(id);
+
       allPosts = []; // refresh data
       displayPosts(searchInput.value);
     });
