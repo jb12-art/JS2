@@ -110,7 +110,7 @@ async function displayPosts(searchTerm = "") {
   document.querySelectorAll(".view-user-btn").forEach((btn) => {
     btn.addEventListener("click", (event) => {
       event.stopPropagation();
-      const username = btn.target.dataset.username;
+      const username = event.target.dataset.username;
 
       // Open new browser window tab
       window.open(`user-posts.html?name=${username}`, "_blank");
