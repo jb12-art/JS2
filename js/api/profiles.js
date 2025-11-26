@@ -16,7 +16,6 @@ export async function followUser(username) {
       headers: {
         Authorization: `Bearer ${load("token")}`,
         "X-noroff-API-Key": API_KEY,
-        // "Content-Type": "application/json",
       },
     }
   );
@@ -34,7 +33,6 @@ export async function unfollowUser(username) {
       headers: {
         Authorization: `Bearer ${load("token")}`,
         "X-Noroff-API-Key": API_KEY,
-        // "Content-Type": "application/json",
       },
     }
   );
@@ -43,10 +41,10 @@ export async function unfollowUser(username) {
   return data;
 }
 
-// Check if you are already following a user
+// Check if you are following + followers a user
 export async function getProfile(username) {
   const response = await fetch(
-    `${API_BASE}/social/profiles/${username}?_followers=true`,
+    `${API_BASE}/social/profiles/${username}?_followers=true&_following=true`,
     {
       headers: {
         Authorization: `Bearer ${load("token")}`,
