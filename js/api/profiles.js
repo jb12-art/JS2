@@ -16,7 +16,7 @@ export async function followUser(username) {
       headers: {
         Authorization: `Bearer ${load("token")}`,
         "X-noroff-API-Key": API_KEY,
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
       },
     }
   );
@@ -34,7 +34,7 @@ export async function unfollowUser(username) {
       headers: {
         Authorization: `Bearer ${load("token")}`,
         "X-Noroff-API-Key": API_KEY,
-        "Content-Type": "application/json",
+        // "Content-Type": "application/json",
       },
     }
   );

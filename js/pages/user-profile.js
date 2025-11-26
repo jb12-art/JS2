@@ -34,7 +34,7 @@ async function displayUserProfile() {
   <hr>
   <h3>Your Posts</h3>
   </div>
-  <div class="user-posts"></div>;
+  <div class="user-posts"></div>
   `;
 
   // Fetch user's own posts
