@@ -2,9 +2,9 @@
 @import url('./media-card.css');
 
 body {
-  margin: 0 auto;
-  min-height: 100vh;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  /* margin: 0 auto; */
+  /* min-height: 100vh; */
+  /* font-family: 'Roboto', Arial, Helvetica, sans-serif; */
   box-sizing: border-box;
   background-color: bisque;
 }
