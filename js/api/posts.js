@@ -2,21 +2,24 @@
 // API features
 // =============================
 
-"use-strict"; // Strict mode ON in local browser.
+'use-strict'; // Strict mode ON in local browser.
 
-import { API_BASE, API_KEY } from "./config.js";
-import { load } from "./storage.js";
+import { API_BASE, API_KEY } from './config.js';
+import { load } from './storage.js';
 
 // ==============
 // GET all posts
 // ==============
-export async function getPosts() {
-  const response = await fetch(`${API_BASE}/social/posts?_author=true`, {
-    headers: {
-      Authorization: `Bearer ${load("token")}`,
-      "X-Noroff-API-Key": API_KEY,
-    },
-  });
+export async function getPosts(limit = 10, page = 1) {
+  const response = await fetch(
+    `${API_BASE}/social/posts?_author=true&limit=${limit}&page=${page}`,
+    {
+      headers: {
+        Authorization: `Bearer ${load('token')}`,
+        'X-Noroff-API-Key': API_KEY,
+      },
+    }
+  );
   return await response.json();
 }
 
@@ -26,13 +29,13 @@ export async function getPosts() {
 export async function getPost(id) {
   const response = await fetch(`${API_BASE}/social/posts/${id}?_author=true`, {
     headers: {
-      Authorization: `Bearer ${load("token")}`,
-      "X-Noroff-API-Key": API_KEY,
+      Authorization: `Bearer ${load('token')}`,
+      'X-Noroff-API-Key': API_KEY,
     },
   });
 
   const data = await response.json();
-  console.log("Fetch single post:", data); // see in console
+  console.log('Fetch single post:', data); // see in console
   return data;
 }
 
@@ -44,8 +47,8 @@ export async function getUserPosts(username) {
     `${API_BASE}/social/profiles/${username}/posts?_author=true`,
     {
       headers: {
-        Authorization: `Bearer ${load("token")}`,
-        "X-Noroff-API-Key": API_KEY,
+        Authorization: `Bearer ${load('token')}`,
+        'X-Noroff-API-Key': API_KEY,
       },
     }
   );
@@ -75,16 +78,16 @@ export async function createPost(title, body, imageUrl) {
   };
 
   // Only include media if user added an image URL
-  if (imageUrl && imageUrl.trim() !== "") {
+  if (imageUrl && imageUrl.trim() !== '') {
     postData.media = { url: imageUrl, alt: title };
   }
 
   const response = await fetch(`${API_BASE}/social/posts`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${load("token")}`,
-      "X-Noroff-API-Key": API_KEY,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${load('token')}`,
+      'X-Noroff-API-Key': API_KEY,
     },
     body: JSON.stringify(postData),
   });
@@ -92,11 +95,11 @@ export async function createPost(title, body, imageUrl) {
   const data = await response.json();
 
   if (!response.ok) {
-    console.error("Failed to create post:", data);
-    throw new Error(data.errors?.[0]?.message || "Post creation failed");
+    console.error('Failed to create post:', data);
+    throw new Error(data.errors?.[0]?.message || 'Post creation failed');
   }
 
-  console.log("Created post:", data);
+  console.log('Created post:', data);
   return data;
 }
 
@@ -108,18 +111,18 @@ export async function updatePost(id, title, body, imageUrl) {
   };
 
   // Only include media if user added an image URL
-  if (imageUrl && imageUrl.trim() !== "") {
+  if (imageUrl && imageUrl.trim() !== '') {
     postData.media = { url: imageUrl, alt: title };
   }
 
-  console.log("Updating post:", postData);
+  console.log('Updating post:', postData);
 
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${load("token")}`,
-      "X-Noroff-API-Key": API_KEY,
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${load('token')}`,
+      'X-Noroff-API-Key': API_KEY,
     },
     body: JSON.stringify(postData),
   });
@@ -127,11 +130,11 @@ export async function updatePost(id, title, body, imageUrl) {
   const data = await response.json();
 
   if (!response.ok) {
-    console.error("Failed to update post:", data);
-    throw new Error(data.errors?.[0]?.message || "Post update failed");
+    console.error('Failed to update post:', data);
+    throw new Error(data.errors?.[0]?.message || 'Post update failed');
   }
 
-  console.log("Updated post:", data);
+  console.log('Updated post:', data);
   return data;
 }
 
@@ -140,17 +143,17 @@ export async function updatePost(id, title, body, imageUrl) {
 // =====================
 export async function deletePost(id) {
   const response = await fetch(`${API_BASE}/social/posts/${id}`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
-      Authorization: `Bearer ${load("token")}`,
-      "X-Noroff-API-Key": API_KEY,
+      Authorization: `Bearer ${load('token')}`,
+      'X-Noroff-API-Key': API_KEY,
     },
   });
 
   if (response.ok) {
     console.log(`Post ${id} deleted successfully`);
   } else {
-    console.error("Failed to delete post:", await response.json());
+    console.error('Failed to delete post:', await response.json());
   }
 }
 
@@ -164,8 +167,8 @@ export async function searchPosts(query) {
     )}&_author=true`,
     {
       headers: {
-        Authorization: `Bearer ${load("token")}`,
-        "X-Noroff-API-Key": API_KEY,
+        Authorization: `Bearer ${load('token')}`,
+        'X-Noroff-API-Key': API_KEY,
       },
     }
   );
@@ -173,8 +176,8 @@ export async function searchPosts(query) {
   const data = await response.json();
 
   if (!response.ok) {
-    console.error("Search failed:", data);
-    throw new Error(data.errors?.[0]?.message || "Could not search posts");
+    console.error('Search failed:', data);
+    throw new Error(data.errors?.[0]?.message || 'Could not search posts');
   }
   return data;
 }

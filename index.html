@@ -32,14 +32,14 @@
   </head>
 
   <body class="min-h-screen">
-    <div class="page-wrapper">
-      <header>
+    <div class="page-wrapper flex flex-col min-h-screen">
+      <header class="h-[130px] text-center">
         <h1>Social media platform</h1>
       </header>
 
-      <main>
+      <main class="grow">
         <!-- Auth register/ login buttons -->
-        <div class="reglog-profile-div">
+        <div class="flex justify-evenly">
           <section class="auth-buttons">
             <h2>Register or Login</h2>
             <div class="register-login-container">
@@ -108,9 +108,13 @@
           <h2 class="latest-posts">Latests Posts</h2>
           <div class="media-box"></div>
         </section>
+
+        <!-- load more posts on page -->
+        <div id="posts"></div>
+        <button id="load-more">Load more</button>
       </main>
 
-      <footer>
+      <footer class="h-[100px] text-center">
         <p>&copy; 2025 Social Media Platform</p>
       </footer>
     </div>

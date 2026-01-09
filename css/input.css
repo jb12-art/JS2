@@ -23,4 +23,16 @@
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     background-color: bisque;
   }
+
+  header {
+    background-color: lightblue;
+  }
+
+  h1 {
+    @apply text-4xl font-bold mb-4;
+  }
+
+  footer {
+    background-color: cadetblue;
+  }
 }

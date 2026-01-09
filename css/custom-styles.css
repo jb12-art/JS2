@@ -9,17 +9,17 @@
   background-color: bisque;
 } */
 
-.page-wrapper {
+/* .page-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
+} */
 
-header {
+/* header {
   text-align: center;
   height: 130px;
   background-color: lightblue;
-}
+} */
 
 .home-page-link {
   padding: 10px 15px;
@@ -31,15 +31,15 @@ header {
   cursor: pointer;
 }
 
-main {
+/* main {
   flex-grow: 1;
-}
+} */
 
 /* shared div, index.html */
-.reglog-profile-div {
+/* .reglog-profile-div {
   display: flex;
   justify-content: space-evenly;
-}
+} */
 
 /* your Profile button / index.html */
 .your-profile-btn {
@@ -98,8 +98,8 @@ main {
   text-align: center;
 }
 
-footer {
+/* footer {
   text-align: center;
   height: 100px;
   background-color: cadetblue;
-}
+} */
