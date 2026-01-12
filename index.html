@@ -45,14 +45,14 @@
           >
             <h2 class="text-lg font-semibold">Register or Login</h2>
             <div class="flex justify-between gap-2 max-w-165px">
-              <a href="account/register.html">
+              <a href="account/register.html" target="_blank">
                 <button
                   class="px-4 py-2 text-sm rounded bg-sky-300 hover:bg-sky-400"
                 >
                   Register
                 </button>
               </a>
-              <a href="account/login.html">
+              <a href="account/login.html" target="_blank">
                 <button
                   class="px-4 py-2 text-sm rounded bg-emerald-200 hover:bg-emerald-300"
                 >
@@ -67,20 +67,23 @@
             class="flex flex-col gap-3 border-2 border-dotted rounded-md p-3 max-w-fit"
           >
             <h2 class="text-lg font-semibold">See profile</h2>
-            <a href="user-profile.html">
-              <button
-                class="px-4 py-2 text-sm rounded bg-fuchsia-300 hover:bg-fuchsia-400"
-                id="viewProfileBtn"
-              >
-                Your Profile
-              </button>
+
+            <a
+              href="user-profile.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-4 py-2 text-sm rounded bg-fuchsia-300 hover:bg-fuchsia-400"
+            >
+              Your Profile
             </a>
           </section>
         </div>
 
         <!-- Form to create a new post -->
-        <div class="create-post-container">
-          <h2>Create a new post</h2>
+        <div
+          class="flex flex-col items-center border-b border-black pb-8 mb-12"
+        >
+          <h2 class="text-xl font-semibold mb-4">Create a new post</h2>
           <form id="createPostForm" class="new-post">
             <input
               class="input-height"

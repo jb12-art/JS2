@@ -1,13 +1,13 @@
 /* ----- Desktop ----- */
 
-.create-post-container {
+/* .create-post-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px black solid;
   padding-bottom: 30px;
   margin-bottom: 50px;
-}
+} */
 
 .new-post {
   display: flex;
