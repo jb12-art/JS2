@@ -6,8 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All posts page</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/custom-styles.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/custom-styles.css" />
     <link rel="icon" href="#" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,30 +33,45 @@
 
   <body class="min-h-screen">
     <div class="page-wrapper flex flex-col min-h-screen">
-      <header class="h-[130px] text-center">
+      <header class="h-30 text-center content-center">
         <h1>Social media platform</h1>
       </header>
 
       <main class="grow">
         <!-- Auth register/ login buttons -->
         <div class="flex justify-evenly">
-          <section class="auth-buttons">
-            <h2>Register or Login</h2>
-            <div class="register-login-container">
+          <section
+            class="flex flex-col gap-3 border-2 border-dotted rounded-md p-3 max-w-fit"
+          >
+            <h2 class="text-lg font-semibold">Register or Login</h2>
+            <div class="flex justify-between gap-2 max-w-165px">
               <a href="account/register.html">
-                <button class="register-btn">Register</button>
+                <button
+                  class="px-4 py-2 text-sm rounded bg-sky-300 hover:bg-sky-400"
+                >
+                  Register
+                </button>
               </a>
               <a href="account/login.html">
-                <button class="login-btn">Login</button>
+                <button
+                  class="px-4 py-2 text-sm rounded bg-emerald-200 hover:bg-emerald-300"
+                >
+                  Login
+                </button>
               </a>
             </div>
           </section>
 
           <!-- Your profile button -->
-          <section class="profile-section">
-            <h2>See profile</h2>
+          <section
+            class="flex flex-col gap-3 border-2 border-dotted rounded-md p-3 max-w-fit"
+          >
+            <h2 class="text-lg font-semibold">See profile</h2>
             <a href="user-profile.html">
-              <button class="your-profile-btn" id="viewProfileBtn">
+              <button
+                class="px-4 py-2 text-sm rounded bg-fuchsia-300 hover:bg-fuchsia-400"
+                id="viewProfileBtn"
+              >
                 Your Profile
               </button>
             </a>
@@ -114,7 +129,7 @@
         <button id="load-more">Load more</button>
       </main>
 
-      <footer class="h-[100px] text-center">
+      <footer class="h-25 text-center content-center">
         <p>&copy; 2025 Social Media Platform</p>
       </footer>
     </div>

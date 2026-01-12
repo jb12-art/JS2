@@ -1,8 +1,6 @@
 /* Input.css */
 
 @import 'tailwindcss';
-@import url('./register-login.css');
-@import url('./media-card.css');
 
 /* Base reset & global styles */
 @layer base {

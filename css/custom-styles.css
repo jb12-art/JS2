@@ -42,7 +42,7 @@
 } */
 
 /* your Profile button / index.html */
-.your-profile-btn {
+/* .your-profile-btn {
   margin: 5px 0px 0px 5px;
   padding: 10px 15px;
   background-color: orchid;
@@ -50,7 +50,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-}
+} */
 
 /* your profile/ user-profile.js */
 .js-profile-info {
