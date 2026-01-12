@@ -31,13 +31,15 @@
     <script type="module" src="./js/pages/index.js" defer></script>
   </head>
 
-  <body class="min-h-screen">
+  <body>
     <div class="page-wrapper flex flex-col min-h-screen">
-      <header class="h-30 text-center content-center">
+      <!-- shared style on pages, input.css -->
+      <header>
         <h1>Social media platform</h1>
       </header>
 
-      <main class="grow">
+      <!-- (main) is shared in inputs.css -->
+      <main>
         <!-- Auth register/ login buttons -->
         <div class="flex justify-evenly">
           <section
@@ -84,9 +86,9 @@
           class="flex flex-col items-center border-b border-black pb-8 mb-12"
         >
           <h2 class="text-xl font-semibold mb-4">Create a new post</h2>
-          <form id="createPostForm" class="new-post">
+          <form id="createPostForm" class="flex flex-col w-full max-w-250">
             <input
-              class="input-height"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50"
               type="text"
               id="postTitle"
               placeholder="Post title"
@@ -94,45 +96,60 @@
               required
             />
             <textarea
-              class="new-post-text-input"
+              class="h-16 mb-5 px-2 border border-black rounded bg-gray-50"
               id="postBody"
               placeholder="Write something..."
               aria-label="Add Body text to your post"
               required
             ></textarea>
             <input
-              class="input-height"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50"
               type="url"
               id="postImage"
               placeholder="Image URL (optional)"
               aria-label="Add Image to your post"
             />
-            <button class="new-post-btn" type="submit">Post</button>
+            <button
+              class="max-w-50 px-5 py-2 bg-green-300 border border-black rounded-lg hover:bg-green-400"
+              type="submit"
+            >
+              Post
+            </button>
           </form>
         </div>
 
         <!-- Search Posts -->
-        <h3 class="search-posts-title">Search posts by title or content</h3>
+        <h3 class="text-center text-lg font-semibold md-2">
+          Search posts by title or content
+        </h3>
         <input
           type="search"
           id="searchInput"
           placeholder="Search for posts"
           aria-label="Search for posts"
-          class="search-posts"
+          class="mx-auto mb-14 block w-full max-w-100 p-2 border border-black rounded bg-gray-50"
         />
 
         <!-- All feed posts list -->
-        <section class="feed-section">
-          <h2 class="latest-posts">Latests Posts</h2>
+        <section class="mb-8">
+          <h2 class="mx-auto max-w-300 text-xl font-semibold mb-3">
+            Latests Posts
+          </h2>
           <div class="media-box"></div>
         </section>
 
         <!-- load more posts on page -->
         <div id="posts"></div>
-        <button id="load-more">Load more</button>
+        <button
+          id="load-more"
+          class="mx-auto mt-6 block px-4 py-2 mb-8 border border-black rounded bg-gray-200 hover:bg-gray-300"
+        >
+          Load more
+        </button>
       </main>
 
-      <footer class="h-25 text-center content-center">
+      <!-- shared style on pages, input.css -->
+      <footer>
         <p>&copy; 2025 Social Media Platform</p>
       </footer>
     </div>

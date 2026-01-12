@@ -9,18 +9,19 @@
   margin-bottom: 50px;
 } */
 
-.new-post {
+/* .new-post {
   display: flex;
   flex-direction: column;
   max-width: 1000px;
   width: 100%;
-}
+} */
 
-.latest-posts {
+/* .latest-posts {
   margin: auto;
   max-width: 1200px;
-}
+} */
 
+/* (Don't touch) connected to JS, user-posts.js */
 .media-box {
   max-width: 1200px;
   margin: 0 auto;

@@ -64,34 +64,34 @@
 }
 
 /* index.html textarea form */
-.new-post-text-input {
+/* .new-post-text-input {
   height: 60px;
   margin-bottom: 20px;
-}
+} */
 
-.new-post-btn {
+/* .new-post-btn {
   max-width: 200px;
   padding: 10px 20px;
   cursor: pointer;
   background-color: lightgreen;
   border: 1px solid black;
   border-radius: 0.5rem;
-}
+} */
 
 /* index.html */
-.search-posts-title {
+/* .search-posts-title {
   text-align: center;
-}
+} */
 
 /* Index.html */
-.search-posts {
+/* .search-posts {
   margin: auto;
   margin-bottom: 55px;
   display: flex;
   padding: 8px;
   width: 100%;
   max-width: 400px;
-}
+} */
 
 /* register/login.html */
 .page-title {
