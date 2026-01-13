@@ -35,14 +35,14 @@
       </header>
 
       <main>
-        <h1 class="page-title">Login</h1>
-        <!-- Register form -->
-        <div class="login-form-container">
-          <div class="login-message" id="loginMessage"></div>
-          <form id="loginForm" class="login-form">
+        <h1 class="text-center mt-12.5">Login</h1>
+        <!-- login form -->
+        <div class="m-12.5">
+          <div id="loginMessage"></div>
+          <form id="loginForm" class="mx-auto flex flex-col max-w-125 w-[95%]">
             <label for="emailLogin">Enter your email</label>
             <input
-              class="input-height form_input"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50 form_input"
               type="email"
               name="email"
               id="emailLogin"
@@ -53,7 +53,7 @@
 
             <label for="passwordLogin">Enter your password</label>
             <input
-              class="input-height form_input"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50 form_input"
               type="password"
               name="password"
               id="passwordLogin"
@@ -64,7 +64,11 @@
             <small class="error-message" id="passwordError"></small>
 
             <div>
-              <input class="login-btn" type="submit" value="Login" />
+              <input
+                class="px-4 py-2 text-sm rounded bg-emerald-200 hover:bg-emerald-300"
+                type="submit"
+                value="Login"
+              />
               <a class="home-btn" href="../index.html">Back to Home </a>
             </div>
           </form>

@@ -200,11 +200,17 @@
       max-width: 96rem;
     }
   }
+  .m-12\.5 {
+    margin: calc(var(--spacing) * 12.5);
+  }
   .mx-auto {
     margin-inline: auto;
   }
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
+  }
+  .mt-12\.5 {
+    margin-top: calc(var(--spacing) * 12.5);
   }
   .mb-3 {
     margin-bottom: calc(var(--spacing) * 3);
@@ -242,6 +248,9 @@
   .min-h-screen {
     min-height: 100vh;
   }
+  .w-\[95\%\] {
+    width: 95%;
+  }
   .w-full {
     width: 100%;
   }
@@ -250,6 +259,9 @@
   }
   .max-w-100 {
     max-width: calc(var(--spacing) * 100);
+  }
+  .max-w-125 {
+    max-width: calc(var(--spacing) * 125);
   }
   .max-w-250 {
     max-width: calc(var(--spacing) * 250);
@@ -432,6 +444,17 @@
     line-height: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+  }
+  .home-btn {
+    padding: 10px 15px;
+    background-color: darksalmon;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 50px;
+    text-decoration: none;
+    color: black;
+    font-size: 14px;
   }
   footer {
     text-align: center;

@@ -58,10 +58,10 @@
 }
 
 /* user-profile.html / user-posts.html / post.html */
-.page-title {
+/* .page-title {
   text-align: center;
   margin-top: 50px;
-}
+} */
 
 /* index.html textarea form */
 /* .new-post-text-input {
@@ -92,11 +92,6 @@
   width: 100%;
   max-width: 400px;
 } */
-
-/* register/login.html */
-.page-title {
-  text-align: center;
-}
 
 /* footer {
   text-align: center;
