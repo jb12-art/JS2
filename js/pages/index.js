@@ -58,7 +58,8 @@ async function displayPosts(searchTerm = '') {
 
   allPosts.forEach((post) => {
     const div = document.createElement('div');
-    div.classList.add('js-post-card');
+    div.className =
+      'js-post-card border border-black bg-orange-100 m-4 p-4 rounded cursor-pointer space-y-2';
     div.dataset.id = post.id;
 
     const isMyPost = currentUser && post.author?.name === currentUser.name;
@@ -79,7 +80,9 @@ async function displayPosts(searchTerm = '') {
       post.created
     ).toLocaleDateString()}</small></p>
 
-    <button class="view-user-btn" data-username="${post.author.name}">
+    <button class="view-user-btn mt-2 px-2 py-1 text-sm border border-black rounded bg-indigo-200 hover:bg-indigo-300" data-username="${
+      post.author.name
+    }">
       View all ${post.author.name}'s Posts
     </button>
 

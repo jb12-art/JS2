@@ -90,7 +90,10 @@ async function displayUserProfile() {
   // Display posts
   posts.forEach((post) => {
     const div = document.createElement('div');
-    div.classList.add('js-post-card');
+    div.dataset.id = post.id;
+    div.className =
+      'js-post-card border border-black bg-orange-100 m-4 p-4 rounded space-y-2 cursor-pointer';
+
     div.innerHTML = `
     <h4>${post.title}</h4>
     <p>${post.body || 'No content'}</p>
@@ -104,13 +107,13 @@ async function displayUserProfile() {
     <p><small>Created: ${new Date(
       post.created
     ).toLocaleDateString()}</small></p>
-      <button data-id="${post.id}" class="view-post-btn">View</button>
+      
     `;
     postsContainer.appendChild(div);
   });
 
   // View individual post in new tab
-  postsContainer.querySelectorAll('.view-post-btn').forEach((btn) => {
+  postsContainer.querySelectorAll('.js-post-card').forEach((btn) => {
     btn.addEventListener('click', (event) => {
       const id = event.target.dataset.id;
       window.open(`post.html?id=${id}`, '_blank');

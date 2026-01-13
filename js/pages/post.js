@@ -1,19 +1,20 @@
 // post.js
 // View Single Post
-"use-strict"; // Strict mode ON in local browser.
+'use-strict'; // Strict mode ON in local browser.
 
-import { load } from "../api/storage.js";
-import { getPost, updatePost, deletePost } from "../api/posts.js";
+import { load } from '../api/storage.js';
+import { getPost, updatePost, deletePost } from '../api/posts.js';
 
 async function displaySinglePost() {
-  const container = document.querySelector(".single-post");
+  const container = document.querySelector('.single-post');
+  container.className = 'single-post max-w-4xl mx-auto mt-8';
 
   // Get the post ID from the URL
   const params = new URLSearchParams(window.location.search);
-  const postId = params.get("id");
+  const postId = params.get('id');
 
   if (!postId) {
-    container.innerHTML = "<p>No post ID found.</p>";
+    container.innerHTML = '<p>No post ID found.</p>';
     return;
   }
 
@@ -22,57 +23,58 @@ async function displaySinglePost() {
   const post = postData.data;
 
   // Create post card
-  const postCard = document.createElement("div");
-  postCard.classList.add("js-post-card");
+  const postCard = document.createElement('div');
+  postCard.className =
+    'js-post-card border border-black bg-orange-100 m-4 p-4 rounded space-y-2';
 
   // Check if it's the user's own post
-  const currentUser = load("profile");
+  const currentUser = load('profile');
   const isMyPost =
     currentUser && post.author && post.author.name === currentUser.name;
 
   // Fill the postCard with post content
   postCard.innerHTML = `
     <h3>${post.title}</h3>
-  <p>${post.body || "No content"}</p>
+  <p>${post.body || 'No content'}</p>
   ${
     post.media?.url
       ? `<img src="${post.media.url}" alt="${
-          post.media.alt || "Post image"
+          post.media.alt || 'Post image'
         }" width="300" />`
-      : ""
+      : ''
   }
-  <p><small>By: ${post.author.name || "Unknown"}</small></p>
+  <p><small>By: ${post.author.name || 'Unknown'}</small></p>
   <p><small>Created: ${new Date(post.created).toLocaleDateString()}</small></p>
   
   ${
     isMyPost
       ? `
-    <div class="single-post-actions">
+    <div class="single-post-actions flex gap-3 mt-4">
     <button class="edit-btn" data-id="${post.id}">Edit</button>
     <button class="delete-btn" data-id="${post.id}">Delete</button>
     </div>
     `
-      : ""
+      : ''
   }
   `;
 
   // Add shared postCard design to container
-  container.innerHTML = "";
+  container.innerHTML = '';
   container.appendChild(postCard);
 
   // Edit post
-  const editBtn = postCard.querySelector(".edit-btn");
+  const editBtn = postCard.querySelector('.edit-btn');
   if (editBtn) {
-    editBtn.addEventListener("click", () => {
+    editBtn.addEventListener('click', () => {
       postCard.innerHTML = `
     <h2 class="edit-title">Edit Post</h2>
     <form class="edit-form">
     <label>Title:</label>
     <input type="text" id="editTitle" value="${post.title}" />
     <label>Body:</label>
-    <textarea id="editBody">${post.body || ""}</textarea>
+    <textarea id="editBody">${post.body || ''}</textarea>
     <label>Image URL:</label>
-    <input type="url" id="editImage" value="${post.media?.url || ""}" />
+    <input type="url" id="editImage" value="${post.media?.url || ''}" />
     <button type="submit">Save</button>
     <button type="button" class="cancel-btn">Cancel</button>
     </form>
@@ -80,31 +82,31 @@ async function displaySinglePost() {
 
       // Save updated post
       postCard
-        .querySelector(".edit-form")
-        .addEventListener("submit", async (e) => {
+        .querySelector('.edit-form')
+        .addEventListener('submit', async (e) => {
           e.preventDefault();
-          const newTitle = e.target.querySelector("#editTitle").value;
-          const newBody = e.target.querySelector("#editBody").value;
-          const newImage = e.target.querySelector("#editImage").value;
+          const newTitle = e.target.querySelector('#editTitle').value;
+          const newBody = e.target.querySelector('#editBody').value;
+          const newImage = e.target.querySelector('#editImage').value;
 
           await updatePost(postId, newTitle, newBody, newImage);
           displaySinglePost(); // Refresh
         });
 
       // Cancel edit
-      postCard.querySelector(".cancel-btn").addEventListener("click", () => {
+      postCard.querySelector('.cancel-btn').addEventListener('click', () => {
         displaySinglePost();
       });
     });
   }
 
   // Delete post function
-  const deleteBtn = postCard.querySelector(".delete-btn");
+  const deleteBtn = postCard.querySelector('.delete-btn');
   if (deleteBtn) {
-    deleteBtn.addEventListener("click", async () => {
-      if (confirm("Delete this post?")) {
+    deleteBtn.addEventListener('click', async () => {
+      if (confirm('Delete this post?')) {
         await deletePost(postId);
-        window.location.href = "index.html"; // back to feed after delete
+        window.location.href = 'index.html'; // back to feed after delete
       }
     });
   }
