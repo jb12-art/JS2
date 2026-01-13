@@ -21,7 +21,7 @@
   background-color: lightblue;
 } */
 
-.home-page-link {
+/* .home-page-link {
   padding: 10px 15px;
   border: 1px black solid;
   border-radius: 4px;
@@ -29,7 +29,7 @@
   background-color: darksalmon;
   color: black;
   cursor: pointer;
-}
+} */
 
 /* main {
   flex-grow: 1;
@@ -53,9 +53,9 @@
 } */
 
 /* your profile/ user-profile.js */
-.js-profile-info {
+/* .js-profile-info {
   margin: 0px 20px;
-}
+} */
 
 /* user-profile.html / user-posts.html / post.html */
 /* .page-title {
