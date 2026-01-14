@@ -1,6 +1,8 @@
 // user-posts.js
 'use-strict'; // Strict mode ON in local browser.
 
+import { createPostCard } from '../ui/postCard.js';
+
 // All posts from one user
 import { getUserPosts } from '../api/posts.js';
 import { followUser, unfollowUser, getProfile } from '../api/profiles.js';
@@ -102,30 +104,36 @@ async function displayUserPosts() {
 
   // Render posts
   userPosts.forEach((post) => {
-    const div = document.createElement('div');
-    div.dataset.id = post.id;
-    div.className =
-      'js-post-card border border-black bg-orange-100 m-4 p-4 rounded space-y-2';
-
-    div.innerHTML = `
-    <h3>${post.title}</h3>
-    <p>${post.body || 'No content'}</p>
-    ${
-      post.media?.url
-        ? `<img src="${post.media.url}" alt="${
-            post.media.alt || 'Post image'
-          }" width="200"/>`
-        : ''
-    }
-    <p><small>By: ${post.author.name}</small></p>
-    <p><small>Created: ${new Date(
-      post.created
-    ).toLocaleDateString()}</small></p>
-    <button class="view-post-btn" data-id="${post.id}">View post</button>
-    `;
-
-    container.appendChild(div);
+    const postCard = createPostCard(post);
+    container.appendChild(postCard);
   });
+
+  // (old code)
+  // userPosts.forEach((post) => {
+  //   const div = document.createElement('div');
+  //   div.dataset.id = post.id;
+  //   div.className =
+  //     'js-post-card border border-black bg-orange-100 m-4 p-4 rounded space-y-2';
+
+  //   div.innerHTML = `
+  //   <h3>${post.title}</h3>
+  //   <p>${post.body || 'No content'}</p>
+  //   ${
+  //     post.media?.url
+  //       ? `<img src="${post.media.url}" alt="${
+  //           post.media.alt || 'Post image'
+  //         }" width="200"/>`
+  //       : ''
+  //   }
+  //   <p><small>By: ${post.author.name}</small></p>
+  //   <p><small>Created: ${new Date(
+  //     post.created
+  //   ).toLocaleDateString()}</small></p>
+  //   <button class="view-post-btn" data-id="${post.id}">View post</button>
+  //   `;
+
+  //   container.appendChild(div);
+  // });
 
   // Open single post in new tab
   document.querySelectorAll('.view-post-btn').forEach((btn) => {

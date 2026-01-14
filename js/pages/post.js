@@ -49,9 +49,9 @@ async function displaySinglePost() {
   ${
     isMyPost
       ? `
-    <div class="single-post-actions flex gap-3 mt-4">
-    <button class="edit-btn" data-id="${post.id}">Edit</button>
-    <button class="delete-btn" data-id="${post.id}">Delete</button>
+    <div class="flex gap-3 mt-4">
+    <button class="edit-btn text-sm px-2 py-1 border rounded bg-sky-200 hover:bg-sky-300 cursor-pointer" data-id="${post.id}">Edit</button>
+    <button class="delete-btn text-sm px-2 py-1 border rounded bg-red-200 hover:bg-red-300 cursor-pointer" data-id="${post.id}">Delete</button>
     </div>
     `
       : ''
@@ -62,7 +62,7 @@ async function displaySinglePost() {
   container.innerHTML = '';
   container.appendChild(postCard);
 
-  // Edit post
+  // Edit post in 'single post page', via user-profile.js
   const editBtn = postCard.querySelector('.edit-btn');
   if (editBtn) {
     editBtn.addEventListener('click', () => {
@@ -70,13 +70,19 @@ async function displaySinglePost() {
     <h2 class="edit-title">Edit Post</h2>
     <form class="edit-form">
     <label>Title:</label>
-    <input type="text" id="editTitle" value="${post.title}" />
+    <input type="text" id="editTitle" class="h-6 mb-5 px-2 border border-black rounded bg-gray-50" value="${
+      post.title
+    }" />
     <label>Body:</label>
-    <textarea id="editBody">${post.body || ''}</textarea>
+    <textarea id="editBody" class="bg-gray-50 border border-black rounded">${
+      post.body || ''
+    }</textarea>
     <label>Image URL:</label>
-    <input type="url" id="editImage" value="${post.media?.url || ''}" />
-    <button type="submit">Save</button>
-    <button type="button" class="cancel-btn">Cancel</button>
+    <input type="url" id="editImage" class="bg-gray-50 border border-black rounded" value="${
+      post.media?.url || ''
+    }" />
+    <button type="submit" class="px-4 py-2 text-sm rounded bg-emerald-200 hover:bg-emerald-300 cursor-pointer">Save</button>
+    <button type="button" class="cancel-btn px-4 py-2 text-sm rounded bg-red-200 hover:bg-red-300 cursor-pointer">Cancel</button>
     </form>
     `;
 
