@@ -9,6 +9,7 @@ export function createPostCard(post, options = {}) {
   const currentUser = load('profile');
   const isMyPost = currentUser && post.author?.name === currentUser.name;
 
+  // js-post-card
   div.dataset.id = post.id;
   div.className = `js-post-card m-5 border border-black bg-orange-100 p-4 rounded space-y-2 cursor-pointer`;
 

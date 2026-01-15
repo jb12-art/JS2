@@ -1,3 +1,4 @@
+// All posts from one user
 // user-posts.js
 'use-strict'; // Strict mode ON in local browser.
 
@@ -16,7 +17,7 @@ function getQueryParam(key) {
 
 async function displayUserPosts() {
   const container = document.querySelector('.media-box');
-  container.className = 'media-box ';
+  // container.className = 'media-box';
   if (!container) return;
 
   const username = getQueryParam('name');
@@ -37,7 +38,7 @@ async function displayUserPosts() {
   // --- header + follow button area ---
   container.innerHTML = `
   <div class="mb-4">
-  <h2 class="text-xl font-semibold mt-6">${username}'s Posts</h2>
+  <h2 class="text-xl font-semibold pl-6 mt-6">${username}'s Posts</h2>
   </div>
   `;
 
@@ -104,7 +105,7 @@ async function displayUserPosts() {
 
   // Render posts
   userPosts.forEach((post) => {
-    const postCard = createPostCard(post);
+    const postCard = createPostCard(post, { showViewUser: false });
     container.appendChild(postCard);
   });
 

@@ -16,6 +16,10 @@ import { load } from '../api/storage.js';
 import { setAuthListener } from '../api/auth.js';
 
 let allPosts = []; // store posts globally
+let visibleCount = 10; // 10 posts will be shown at a time
+const POSTS_PER_LOAD = 10;
+
+const loadMoreBtn = document.getElementById('load-more');
 
 // ======================
 // Fetch & Display posts
@@ -58,7 +62,18 @@ async function displayPosts(searchTerm = '') {
     return;
   }
 
-  allPosts.forEach((post) => {
+  // allPosts.forEach((post) => {
+  //   const postCard = createPostCard(post);
+  //   container.appendChild(postCard);
+  // });
+
+  // Clear old posts ONLY when starting fresh
+  container.innerHTML = '';
+
+  // Show only a slice of posts
+  const postsToShow = allPosts.slice(0, visibleCount);
+
+  postsToShow.forEach((post) => {
     const postCard = createPostCard(post);
     container.appendChild(postCard);
   });
@@ -198,6 +213,12 @@ async function displayPosts(searchTerm = '') {
       });
     });
   });
+
+  if (visibleCount >= allPosts.length) {
+    loadMoreBtn.style.display = 'none';
+  } else {
+    loadMoreBtn.style.display = 'block';
+  }
 }
 
 // =============================
@@ -206,6 +227,7 @@ async function displayPosts(searchTerm = '') {
 const searchInput = document.getElementById('searchInput');
 if (searchInput) {
   searchInput.addEventListener('input', () => {
+    visibleCount = POSTS_PER_LOAD; // reset
     displayPosts(searchInput.value);
   });
 }
@@ -228,6 +250,7 @@ if (postForm) {
 
     await createPost(title, body, imageUrl);
     postForm.reset();
+    visibleCount = POSTS_PER_LOAD;
     displayPosts(searchInput.value);
   });
 }
@@ -249,6 +272,15 @@ if (viewProfileBtn) {
       return;
     }
     window.location.href = 'user-profile.html';
+  });
+}
+
+// Load more button logic
+
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener('click', () => {
+    visibleCount += POSTS_PER_LOAD;
+    displayPosts(searchInput.value);
   });
 }
 
