@@ -33,7 +33,7 @@ const loadMoreBtn = document.getElementById('load-more');
  */
 async function loadPosts(searchTerm = '') {
   if (searchTerm.trim() === '') {
-    const data = await getPosts();
+    const data = await getPosts(100);
     allPosts = data.data;
   } else {
     const data = await searchPosts(searchTerm);
@@ -47,18 +47,21 @@ async function loadPosts(searchTerm = '') {
 /**
  * Renders the posts to the feed area.
  */
-async function displayPosts(searchTerm = '') {
+async function displayPosts(searchTerm = '', fetch = false) {
   const container = document.querySelector('.media-box');
   if (!container) return;
 
   // Fetch from API (all or search)
-  await loadPosts(searchTerm);
+  if (fetch) {
+    await loadPosts(searchTerm);
+  }
 
   const currentUser = load('profile'); // logged-in user
   container.innerHTML = ''; // Clear old posts
 
   if (allPosts.length === 0) {
     container.innerHTML = '<p>No posts found.</p>';
+    loadMoreBtn.style.display = 'none';
     return;
   }
 
@@ -67,9 +70,6 @@ async function displayPosts(searchTerm = '') {
   //   container.appendChild(postCard);
   // });
 
-  // Clear old posts ONLY when starting fresh
-  container.innerHTML = '';
-
   // Show only a slice of posts
   const postsToShow = allPosts.slice(0, visibleCount);
 
@@ -77,6 +77,8 @@ async function displayPosts(searchTerm = '') {
     const postCard = createPostCard(post);
     container.appendChild(postCard);
   });
+
+  loadMoreBtn.style.display = visibleCount < allPosts.length ? 'block' : 'none';
 
   // (Old code)
   // allPosts.forEach((post) => {
@@ -213,12 +215,6 @@ async function displayPosts(searchTerm = '') {
       });
     });
   });
-
-  if (visibleCount >= allPosts.length) {
-    loadMoreBtn.style.display = 'none';
-  } else {
-    loadMoreBtn.style.display = 'block';
-  }
 }
 
 // =============================
@@ -228,7 +224,7 @@ const searchInput = document.getElementById('searchInput');
 if (searchInput) {
   searchInput.addEventListener('input', () => {
     visibleCount = POSTS_PER_LOAD; // reset
-    displayPosts(searchInput.value);
+    displayPosts(searchInput.value, true);
   });
 }
 
@@ -251,7 +247,7 @@ if (postForm) {
     await createPost(title, body, imageUrl);
     postForm.reset();
     visibleCount = POSTS_PER_LOAD;
-    displayPosts(searchInput.value);
+    displayPosts(searchInput.value, true);
   });
 }
 
@@ -276,7 +272,6 @@ if (viewProfileBtn) {
 }
 
 // Load more button logic
-
 if (loadMoreBtn) {
   loadMoreBtn.addEventListener('click', () => {
     visibleCount += POSTS_PER_LOAD;
@@ -288,5 +283,5 @@ if (loadMoreBtn) {
 // Run setup
 // =============================
 // Run displayPosts after login
-displayPosts();
+displayPosts('', true);
 setAuthListener();
