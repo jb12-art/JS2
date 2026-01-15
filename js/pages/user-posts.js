@@ -16,7 +16,7 @@ function getQueryParam(key) {
 
 async function displayUserPosts() {
   const container = document.querySelector('.media-box');
-  container.className = 'media-box max-w-5xl mx-auto flex flex-col gap-4';
+  container.className = 'media-box ';
   if (!container) return;
 
   const username = getQueryParam('name');

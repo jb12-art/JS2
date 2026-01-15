@@ -6,8 +6,8 @@ import { load } from '../api/storage.js';
 import { getPost, updatePost, deletePost } from '../api/posts.js';
 
 async function displaySinglePost() {
-  const container = document.querySelector('.single-post');
-  container.className = 'single-post max-w-4xl mx-auto mt-8';
+  const container = document.querySelector('.media-box');
+  container.className = 'media-box';
 
   // Get the post ID from the URL
   const params = new URLSearchParams(window.location.search);
@@ -40,7 +40,7 @@ async function displaySinglePost() {
     post.media?.url
       ? `<img src="${post.media.url}" alt="${
           post.media.alt || 'Post image'
-        }" width="300" />`
+        }" class="w-100 h-48 object-cover" />`
       : ''
   }
   <p><small>By: ${post.author.name || 'Unknown'}</small></p>

@@ -28,6 +28,7 @@
   flex-direction: column;
   border: 1px black solid;
   overflow-wrap: break-word;
+  margin-bottom: 40px;
 }
 
 /* .js-post-card {

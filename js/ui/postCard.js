@@ -20,7 +20,7 @@ export function createPostCard(post, options = {}) {
     post.media?.url
       ? `<img src="${post.media.url}" alt="${
           post.media.alt || 'Post image'
-        }" class="w-130 rounded" />`
+        }" class="w-100 h-48 object-cover" />`
       : ''
   }
 
