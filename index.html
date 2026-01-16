@@ -86,7 +86,7 @@
           class="flex flex-col items-center border-b border-black pb-8 mb-12"
         >
           <h2 class="text-xl font-semibold mb-4">Create a new post</h2>
-          <form id="createPostForm" class="flex flex-col w-full max-w-250">
+          <form id="createPostForm" class="flex flex-col px-2 w-full max-w-250">
             <input
               class="h-6 mb-5 px-2 border border-black rounded bg-gray-50"
               type="text"
@@ -122,16 +122,18 @@
         <h3 class="text-center text-lg font-semibold md-2">
           Search posts by title or content
         </h3>
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="Search for posts"
-          aria-label="Search for posts"
-          class="mx-auto mb-14 block w-full max-w-100 p-2 border border-black rounded bg-gray-50"
-        />
+        <div class="px-2">
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search for posts"
+            aria-label="Search for posts"
+            class="mx-auto mb-14 block w-full max-w-100 p-2 border border-black rounded bg-gray-50"
+          />
+        </div>
 
         <!-- All feed posts list -->
-        <section class="mb-8">
+        <section class="mb-8 px-2">
           <h2 class="mx-auto max-w-300 text-xl font-semibold mb-3">
             Latests Posts
           </h2>
