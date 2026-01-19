@@ -1,16 +1,18 @@
 // User’s own profile page
 
-"use-strict"; // Strict mode ON in local browser.
+'use-strict'; // Strict mode ON in local browser.
 
-import { load } from "../api/storage.js";
-import { getUserPosts } from "../api/posts.js";
-import { getProfile, unfollowUser } from "../api/profiles.js";
+import { createPostCard } from '../ui/postCard.js';
+
+import { load } from '../api/storage.js';
+import { getUserPosts } from '../api/posts.js';
+import { getProfile, unfollowUser } from '../api/profiles.js';
 
 async function displayUserProfile() {
-  const container = document.querySelector(".media-box");
+  const container = document.querySelector('.media-box');
   if (!container) return;
 
-  const currentUser = load("profile");
+  const currentUser = load('profile');
   if (!currentUser) {
     container.innerHTML = `<p>Login to view your profile.</p>`;
     return;
@@ -25,7 +27,7 @@ async function displayUserProfile() {
 
   // Basic profile info
   container.innerHTML = `
-  <div class="js-profile-info">
+  <div class="mx-5">
     <p><strong>Name:</strong> ${profile.name}</p>
     <p><strong>Email:</strong> ${profile.email}</p>
     <p><strong>Followers:</strong> ${profile._count.followers}</p>
@@ -43,13 +45,13 @@ async function displayUserProfile() {
   `;
 
   // List of users you follow
-  const followingList = container.querySelector(".following-list");
+  const followingList = container.querySelector('.following-list');
 
   if (profile.following.length === 0) {
-    followingList.innerHTML = "<li>Not following anyone</li>";
+    followingList.innerHTML = '<li>Not following anyone</li>';
   } else {
     profile.following.forEach((user) => {
-      const li = document.createElement("li");
+      const li = document.createElement('li');
 
       li.innerHTML = `
       <span>${user.name}</span>
@@ -63,8 +65,8 @@ async function displayUserProfile() {
   }
 
   // Unfollow button
-  followingList.querySelectorAll(".unfollow-btn").forEach((btn) => {
-    btn.addEventListener("click", async (event) => {
+  followingList.querySelectorAll('.unfollow-btn').forEach((btn) => {
+    btn.addEventListener('click', async (event) => {
       const username = event.target.dataset.username;
 
       if (!confirm(`Unfollow ${username}?`)) return;
@@ -80,42 +82,51 @@ async function displayUserProfile() {
   const postsData = await getUserPosts(username);
   const posts = postsData.data;
 
-  const postsContainer = container.querySelector(".user-posts");
+  const postsContainer = container.querySelector('.user-posts');
 
   if (!posts || posts.length === 0) {
     postsContainer.innerHTML = "<p>You haven't made any posts yet.</p>";
     return;
   }
 
-  // Display posts
+  // Display posts / Render
   posts.forEach((post) => {
-    const div = document.createElement("div");
-    div.classList.add("js-post-card");
-    div.innerHTML = `
-    <h4>${post.title}</h4>
-    <p>${post.body || "No content"}</p>
-    ${
-      post.media?.url
-        ? `<img src="${post.media.url}" alt="${
-            post.media.alt || "Post image"
-          }" width="200" />`
-        : ""
-    }
-    <p><small>Created: ${new Date(
-      post.created
-    ).toLocaleDateString()}</small></p>
-      <button data-id="${post.id}" class="view-post-btn">View</button>
-    `;
-    postsContainer.appendChild(div);
+    const postCard = createPostCard(post, { showViewUser: false });
+    postsContainer.appendChild(postCard);
   });
 
+  // (old code)
+  // posts.forEach((post) => {
+  //   const div = document.createElement('div');
+  //   div.dataset.id = post.id;
+  //   div.className =
+  //     'js-post-card border border-black bg-orange-100 m-4 p-4 rounded space-y-2 cursor-pointer';
+
+  //   div.innerHTML = `
+  //   <h4>${post.title}</h4>
+  //   <p>${post.body || 'No content'}</p>
+  //   ${
+  //     post.media?.url
+  //       ? `<img src="${post.media.url}" alt="${
+  //           post.media.alt || 'Post image'
+  //         }" width="200" />`
+  //       : ''
+  //   }
+  //   <p><small>Created: ${new Date(
+  //     post.created
+  //   ).toLocaleDateString()}</small></p>
+
+  //   `;
+  //   postsContainer.appendChild(div);
+  // });
+
   // View individual post in new tab
-  postsContainer.querySelectorAll(".view-post-btn").forEach((btn) => {
-    btn.addEventListener("click", (event) => {
-      const id = event.target.dataset.id;
-      window.open(`post.html?id=${id}`, "_blank");
-    });
-  });
+  // postsContainer.querySelectorAll('.js-post-card').forEach((btn) => {
+  //   btn.addEventListener('click', (event) => {
+  //     const id = event.target.dataset.id;
+  //     window.open(`post.html?id=${id}`, '_blank');
+  //   });
+  // });
 }
 
 // Run setup

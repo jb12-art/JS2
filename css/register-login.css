@@ -1,7 +1,7 @@
 /* Register and Login CSS */
 
 /* 'Section' register/ login buttons */
-.auth-buttons,
+/* .auth-buttons,
 .profile-section {
   margin: 10px;
   max-width: fit-content;
@@ -11,54 +11,54 @@
   border-style: dotted;
   border-width: 2px;
   border-radius: 6px;
-}
+} */
 
 /* register/ login container div */
-.register-login-container {
+/* .register-login-container {
   display: flex;
   max-width: 165px;
   justify-content: space-between;
   margin: 5px 0px 0px 5px;
-}
+} */
 
-.register-form-container,
+/* .register-form-container,
 .login-form-container {
   margin: 50px 50px;
-}
+} */
 
-.register-form,
+/* .register-form,
 .login-form {
   margin: auto;
   max-width: 500px;
   width: 95%;
   display: flex;
   flex-direction: column;
-}
+} */
 
-.input-height {
+/* .input-height {
   margin-bottom: 20px;
   height: 25px;
-}
+} */
 
-.register-btn,
+/* .register-btn,
 .login-btn {
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
-}
+} */
 
-.register-btn {
+/* .register-btn {
   background-color: rgb(145, 225, 252);
 }
 
 .login-btn {
   background-color: aquamarine;
-}
+} */
 
 /* All pages can share this home-btn */
-.home-btn {
+/* .home-btn {
   padding: 10px 15px;
   background-color: darksalmon;
   border: none;
@@ -68,8 +68,8 @@
   text-decoration: none;
   color: black;
   font-size: 14px;
-}
+} */
 
-.reg-pass-text {
+/* .reg-pass-text {
   margin: 0px 0px 40px 0px;
-}
+} */

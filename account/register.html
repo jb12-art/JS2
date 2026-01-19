@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <title>Register Page</title>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/custom-styles.css" />
     <link rel="icon" href="#" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,27 +18,37 @@
       crossorigin="anonymous"
     ></script>
     <!-- Load shared API and utilities first/ api folder -->
-     <script type="module" src="../js/api/auth.js" defer></script>
+    <script type="module" src="../js/api/auth.js" defer></script>
     <script type="module" src="../js/api/storage.js" defer></script>
     <!-- Then load the Page-specific single post logic/ index.js -->
     <script type="module" src="../js/pages/index.js" defer></script>
+
+    <title>Register Page</title>
   </head>
+
   <body>
-    <div class="page-wrapper">
+    <div class="flex flex-col min-h-screen">
       <header>
-        <div>
-          <h1>Social media platform</h1>
-        </div>
+        <h1>Social media platform</h1>
+        <a
+          class="py-2.5 px-3.75 rounded-sm no-underline bg-[darksalmon] text-black cursor-pointer"
+          href="../index.html"
+          >Back to Home
+        </a>
       </header>
-      <main>
-        <h1 class="page-title">Register</h1>
+
+      <main class="grow">
+        <h1 class="text-center mt-12.5">Register</h1>
         <!-- Register form -->
-        <div class="register-form-container">
+        <div class="m-12.5">
           <div class="register-message" id="registerMessage"></div>
-          <form id="registerForm"  class="register-form">
+          <form
+            id="registerForm"
+            class="mx-auto flex flex-col max-w-125 w-[95%]"
+          >
             <label for="nameRegistration">Enter a user name</label>
             <input
-              class="input-height form_input"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50 form_input"
               type="name"
               name="name"
               id="nameRegistration"
@@ -48,7 +58,7 @@
 
             <label for="emailRegistration">Enter your email</label>
             <input
-              class="input-height form_input"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50 form_input"
               type="email"
               name="email"
               id="emailRegistration"
@@ -59,7 +69,7 @@
 
             <label for="passwordRegistration">Enter your password</label>
             <input
-              class="input-height form_input"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50 form_input"
               type="password"
               name="password"
               id="passwordRegistration"
@@ -68,16 +78,18 @@
               placeholder="password"
             />
             <small class="error-message" id="passwordError"></small>
-            <p class="reg-pass-text">At least 8 characters</p>
+            <p class="mb-10">At least 8 characters</p>
             <div>
-            <input class="register-btn" type="submit" value="Register"></input>
-            <a class="home-btn" href="../index.html">
-              Back to Home
-            </a>
+              <input
+                class="px-4 py-2 text-sm rounded bg-sky-300 hover:bg-sky-400 cursor-pointer"
+                type="submit"
+                value="Register"
+              />
             </div>
           </form>
         </div>
       </main>
+
       <footer>
         <p>&copy; 2025 Social Media Platform</p>
       </footer>

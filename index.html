@@ -6,8 +6,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All posts page</title>
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/custom-styles.css" />
     <link rel="icon" href="#" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -30,41 +32,63 @@
   </head>
 
   <body>
-    <div class="page-wrapper">
+    <div class="flex flex-col min-h-screen">
+      <!-- shared style on pages, input.css -->
       <header>
         <h1>Social media platform</h1>
       </header>
 
-      <main>
+      <!-- (main) is shared in inputs.css -->
+      <main class="grow">
         <!-- Auth register/ login buttons -->
-        <div class="reglog-profile-div">
-          <section class="auth-buttons">
-            <h2>Register or Login</h2>
-            <div class="register-login-container">
-              <a href="account/register.html">
-                <button class="register-btn">Register</button>
+        <div class="flex justify-evenly">
+          <section
+            class="flex flex-col gap-3 border-2 border-dotted rounded-md p-3 max-w-fit"
+          >
+            <h2 class="text-lg font-semibold">Register or Login</h2>
+            <div class="flex justify-between gap-2 max-w-165px">
+              <a href="account/register.html" target="_blank">
+                <button
+                  class="px-4 py-2 text-sm rounded bg-sky-300 hover:bg-sky-400"
+                >
+                  Register
+                </button>
               </a>
-              <a href="account/login.html">
-                <button class="login-btn">Login</button>
+              <a href="account/login.html" target="_blank">
+                <button
+                  class="px-4 py-2 text-sm rounded bg-emerald-200 hover:bg-emerald-300"
+                >
+                  Login
+                </button>
               </a>
             </div>
           </section>
 
           <!-- Your profile button -->
-          <section class="profile-section">
-            <h2>See profile</h2>
-            <button class="your-profile-btn" id="viewProfileBtn">
+          <section
+            class="flex flex-col gap-3 border-2 border-dotted rounded-md p-3 max-w-fit"
+          >
+            <h2 class="text-lg font-semibold">See profile</h2>
+
+            <a
+              href="user-profile.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block px-4 py-2 text-sm rounded bg-fuchsia-300 hover:bg-fuchsia-400"
+            >
               Your Profile
-            </button>
+            </a>
           </section>
         </div>
 
         <!-- Form to create a new post -->
-        <div class="create-post-container">
-          <h2>Create a new post</h2>
-          <form id="createPostForm" class="new-post">
+        <div
+          class="flex flex-col items-center border-b border-black pb-8 mb-12"
+        >
+          <h2 class="text-xl font-semibold mb-4">Create a new post</h2>
+          <form id="createPostForm" class="flex flex-col px-2 w-full max-w-250">
             <input
-              class="input-height"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50"
               type="text"
               id="postTitle"
               placeholder="Post title"
@@ -72,40 +96,61 @@
               required
             />
             <textarea
-              class="new-post-text-input"
+              class="h-16 mb-5 px-2 border border-black rounded bg-gray-50"
               id="postBody"
               placeholder="Write something..."
               aria-label="Add Body text to your post"
               required
             ></textarea>
             <input
-              class="input-height"
+              class="h-6 mb-5 px-2 border border-black rounded bg-gray-50"
               type="url"
               id="postImage"
               placeholder="Image URL (optional)"
               aria-label="Add Image to your post"
             />
-            <button class="new-post-btn" type="submit">Post</button>
+            <button
+              class="max-w-50 px-5 py-2 bg-green-300 border border-black rounded-lg hover:bg-green-400"
+              type="submit"
+            >
+              Post
+            </button>
           </form>
         </div>
 
         <!-- Search Posts -->
-        <h3 class="search-posts-title">Search posts by title or content</h3>
-        <input
-          type="search"
-          id="searchInput"
-          placeholder="Search for posts"
-          aria-label="Search for posts"
-          class="search-posts"
-        />
+        <h3 class="text-center text-lg font-semibold md-2">
+          Search posts by title or content
+        </h3>
+        <div class="px-2">
+          <input
+            type="search"
+            id="searchInput"
+            placeholder="Search for posts"
+            aria-label="Search for posts"
+            class="mx-auto mb-14 block w-full max-w-100 p-2 border border-black rounded bg-gray-50"
+          />
+        </div>
 
         <!-- All feed posts list -->
-        <section class="feed-section">
-          <h2 class="latest-posts">Latests Posts</h2>
+        <section class="mb-8 px-2">
+          <h2 class="mx-auto max-w-300 text-xl font-semibold mb-3">
+            Latests Posts
+          </h2>
           <div class="media-box"></div>
         </section>
+
+        <!-- load more posts on page -->
+        <div id="posts"></div>
+        <button
+          id="load-more"
+          class="mx-auto mt-6 block px-4 py-2 mb-8 border border-black rounded bg-gray-200 hover:bg-gray-300"
+        >
+          Load more
+        </button>
       </main>
 
+      <!-- shared style on pages, input.css -->
       <footer>
         <p>&copy; 2025 Social Media Platform</p>
       </footer>

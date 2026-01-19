@@ -1,26 +1,25 @@
-/* ----- Desktop ----- */
-
-.create-post-container {
+/* .create-post-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   border-bottom: 1px black solid;
   padding-bottom: 30px;
   margin-bottom: 50px;
-}
+} */
 
-.new-post {
+/* .new-post {
   display: flex;
   flex-direction: column;
   max-width: 1000px;
   width: 100%;
-}
+} */
 
-.latest-posts {
+/* .latest-posts {
   margin: auto;
   max-width: 1200px;
-}
+} */
 
+/* (Don't touch) connected to JS, user-posts.js */
 .media-box {
   max-width: 1200px;
   margin: 0 auto;
@@ -29,14 +28,15 @@
   flex-direction: column;
   border: 1px black solid;
   overflow-wrap: break-word;
+  margin-bottom: 40px;
 }
 
-.js-post-card {
+/* .js-post-card {
   border: 1px solid black;
   cursor: pointer;
   margin: 20px 20px;
   background-color: bisque;
-}
+} */
 
 /* feed page/ js.post-card edit/delete buttons */
 .edit-btn,
